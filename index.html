@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kaustubh Salunke · AI / ML Engineer & Data Scientist specializing in LLM apps, Agentic RAG, and MLOps. Berlin-based." />
+  <title>Kaustubh Salunke · AI / ML Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fafaf7;
+      --bg-elev: #ffffff;
+      --ink: #111111;
+      --ink-soft: #55585c;
+      --ink-muted: #8a8e94;
+      --line: #e8e6df;
+      --accent: #ff5722;
+      --accent-soft: #fff1ec;
+      --chip: #f2efe7;
+      --shadow: 0 1px 2px rgba(17,17,17,.04), 0 8px 24px rgba(17,17,17,.05);
+      --radius: 14px;
+    }
+    [data-theme="dark"] {
+      --bg: #0d0d0f;
+      --bg-elev: #16161a;
+      --ink: #f4f4f2;
+      --ink-soft: #b5b8be;
+      --ink-muted: #7a7d85;
+      --line: #26262c;
+      --accent: #ff7a4a;
+      --accent-soft: #281912;
+      --chip: #1e1e24;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+      transition: background .25s ease, color .25s ease;
+    }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+    /* PROGRESS */
+    .progress {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 40%, transparent));
+      width: 0%; z-index: 100; transition: width .1s linear;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(12px);
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 24px; max-width: 960px; margin: 0 auto;
+    }
+    .brand { font-weight: 700; letter-spacing: -.01em; font-size: 15px; }
+    .brand .dot { color: var(--accent); }
+    .nav-links { display: flex; gap: 22px; align-items: center; }
+    .nav-links a {
+      color: var(--ink-soft); text-decoration: none; font-size: 14.5px; font-weight: 500;
+      transition: color .15s; position: relative; padding-bottom: 2px;
+    }
+    .nav-links a::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+      height: 1.5px; background: var(--accent); transform: scaleX(0);
+      transform-origin: right; transition: transform .3s cubic-bezier(.2,.8,.2,1);
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+    .theme-btn {
+      background: none; border: 1px solid var(--line); border-radius: 999px;
+      width: 32px; height: 32px; cursor: pointer; color: var(--ink-soft);
+      display: grid; place-items: center; transition: all .25s cubic-bezier(.2,.8,.2,1);
+    }
+    .theme-btn:hover { border-color: var(--accent); color: var(--accent); transform: rotate(20deg); }
+    .theme-btn:active { transform: rotate(180deg); }
+    .lang-btn {
+      background: none; border: 1px solid var(--line); border-radius: 999px;
+      height: 32px; padding: 0 10px; cursor: pointer; color: var(--ink-soft);
+      font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 500;
+      letter-spacing: .04em;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: all .25s cubic-bezier(.2,.8,.2,1);
+    }
+    .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .lang-btn .lang-active { color: var(--ink); font-weight: 700; }
+    .lang-btn:hover .lang-active { color: var(--accent); }
+    .lang-btn .lang-sep { opacity: .4; }
+
+    /* HERO */
+    header.hero { padding: 112px 0 48px; }
+    .hero-blob {
+      position: absolute; top: -120px; right: -120px;
+      width: 480px; height: 480px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 60%);
+      filter: blur(60px); z-index: 0; pointer-events: none;
+      animation: float 14s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-30px, 20px) scale(1.06); }
+      66% { transform: translate(20px, -30px) scale(.95); }
+    }
+    header.hero > *:not(.hero-blob) { position: relative; z-index: 1; }
+    .status {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 12px; border: 1px solid var(--line);
+      border-radius: 999px; font-size: 12px; color: var(--ink-soft);
+      background: var(--bg-elev);
+      margin-bottom: 20px;
+      animation: fadeSlideUp .6s ease both;
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+    .status .pulse {
+      width: 7px; height: 7px; background: #22c55e; border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(34,197,94,.6); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(34,197,94,.5); }
+      70% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    }
+    h1 {
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 800; letter-spacing: -.035em; line-height: 1.05;
+      margin-bottom: 18px;
+      animation: fadeSlideUp .7s ease .1s both;
+    }
+    h1 .accent { color: var(--accent); }
+    h1 .cursor {
+      display: inline-block; width: .08em; height: .9em;
+      background: var(--accent); vertical-align: -0.08em;
+      margin-left: 4px; animation: blink 1.1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .role { animation: fadeSlideUp .7s ease .2s both; }
+    .intro { animation: fadeSlideUp .7s ease .3s both; }
+    .cta { animation: fadeSlideUp .7s ease .4s both; }
+    .role { font-size: 19px; color: var(--ink-soft); margin-bottom: 14px; font-weight: 500; }
+    .role .sep { color: var(--ink-muted); margin: 0 8px; }
+    .intro { max-width: 640px; color: var(--ink-soft); font-size: 18px; margin-bottom: 28px; }
+    .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px; border-radius: 10px;
+      text-decoration: none; font-size: 15px; font-weight: 500;
+      transition: transform .2s, background .15s, border-color .15s, box-shadow .2s;
+      position: relative; overflow: hidden;
+    }
+    .btn-primary { background: var(--ink); color: var(--bg); }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px color-mix(in srgb, var(--ink) 25%, transparent);
+    }
+    .btn-primary:hover span.arrow { transform: translateX(3px); }
+    .btn-primary span.arrow { display: inline-block; transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+    .btn-ghost { border: 1px solid var(--line); color: var(--ink); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* SECTION */
+    section.wrap {
+      padding: 88px 24px 78px;
+      border-top: 1px solid var(--line);
+      position: relative;
+    }
+    section.wrap + section.wrap { padding-top: 88px; }
+    .section-head {
+      display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px;
+      position: relative;
+    }
+    .section-head::after {
+      content: ""; flex: 1; height: 1px; background: var(--line);
+      margin-left: 10px; transform: scaleX(0); transform-origin: left;
+      transition: transform 1.2s cubic-bezier(.2,.8,.2,1) .1s;
+    }
+    .reveal.in .section-head::after { transform: scaleX(1); }
+    .section-head .num {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent); font-size: 14px; font-weight: 500;
+      opacity: 0; transform: translateY(6px);
+      transition: opacity .6s ease .1s, transform .6s ease .1s;
+    }
+    .section-head h2 {
+      font-size: 32px; font-weight: 700; letter-spacing: -.02em;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity .6s ease .2s, transform .6s ease .2s;
+    }
+    .reveal.in .section-head .num,
+    .reveal.in .section-head h2 { opacity: 1; transform: none; }
+
+    /* ABOUT */
+    .about p { color: var(--ink-soft); font-size: 17px; margin-bottom: 16px; max-width: 700px; }
+
+    /* EXPERIENCE */
+    .job { padding: 20px 0; border-bottom: 1px dashed var(--line); }
+    .job:last-child { border-bottom: none; }
+    .job-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      flex-wrap: wrap; gap: 6px; margin-bottom: 6px;
+    }
+    .job-title { font-weight: 600; font-size: 17px; }
+    .job-title .co { color: var(--accent); }
+    .job-date { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--ink-muted); }
+    .job-sub { color: var(--ink-soft); font-size: 15px; margin-bottom: 10px; }
+    .job ul { list-style: none; padding-left: 0; }
+    .job li {
+      color: var(--ink-soft); font-size: 15.5px; margin-bottom: 8px;
+      padding-left: 18px; position: relative;
+      transition: transform .25s cubic-bezier(.2,.8,.2,1);
+    }
+    .job li::before {
+      content: "→"; position: absolute; left: 0; color: var(--accent); font-weight: 600;
+      transition: transform .25s cubic-bezier(.2,.8,.2,1);
+    }
+    .job li:hover { transform: translateX(3px); }
+    .job li:hover::before { transform: translateX(2px); }
+
+    /* PROJECTS */
+    .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    @media (max-width: 720px) { .projects { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .25s, box-shadow .3s;
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(16px);
+    }
+    .reveal.in .card {
+      animation: cardIn .6s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .reveal.in .card:nth-child(1) { animation-delay: .05s; }
+    .reveal.in .card:nth-child(2) { animation-delay: .15s; }
+    .reveal.in .card:nth-child(3) { animation-delay: .25s; }
+    .reveal.in .card:nth-child(4) { animation-delay: .35s; }
+    .reveal.in .card:nth-child(5) { animation-delay: .45s; }
+    .reveal.in .card:nth-child(6) { animation-delay: .55s; }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: none; }
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+      box-shadow: 0 12px 32px color-mix(in srgb, var(--accent) 10%, transparent);
+    }
+    .card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .35s cubic-bezier(.2,.8,.2,1);
+    }
+    .card:hover::before { transform: scaleX(1); }
+    .card-head {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 10px;
+    }
+    .card h3 { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+    .tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+      padding: 3px 8px; border-radius: 6px; background: var(--chip);
+      color: var(--ink-soft); white-space: nowrap;
+    }
+    .card p { color: var(--ink-soft); font-size: 15px; margin-bottom: 12px; }
+    .stack {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto;
+    }
+    .stack span {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: var(--ink-muted);
+    }
+    .stack span::after { content: "·"; margin-left: 6px; color: var(--ink-muted); }
+    .stack span:last-child::after { content: ""; }
+
+    /* SKILLS */
+    .skills-grid { display: grid; gap: 14px; }
+    .skill-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: baseline; }
+    .skill-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+      color: var(--accent); min-width: 150px; text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .skill-items { color: var(--ink-soft); font-size: 15.5px; flex: 1; }
+
+    /* EDUCATION */
+    .edu-item { padding: 16px 0; border-bottom: 1px dashed var(--line); }
+    .edu-item:last-child { border-bottom: none; }
+    .edu-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      flex-wrap: wrap; gap: 6px;
+    }
+    .edu-school { font-weight: 600; font-size: 16px; }
+    .edu-degree { color: var(--ink-soft); font-size: 15px; margin-top: 3px; }
+    .edu-date { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--ink-muted); }
+
+    /* CERTS */
+    .certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .cert {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px; border: 1px solid var(--line); border-radius: 10px;
+      background: var(--bg-elev);
+      transition: border-color .2s, transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .2s;
+    }
+    .cert:hover {
+      border-color: var(--accent); transform: translateY(-2px);
+      box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 8%, transparent);
+    }
+    .cert:hover .cert-icon { transform: scale(1.08); }
+    .cert-icon { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+    .cert-icon {
+      width: 34px; height: 34px; flex-shrink: 0; border-radius: 8px;
+      background: var(--accent-soft); color: var(--accent);
+      display: grid; place-items: center; font-weight: 700; font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .cert-name { font-size: 14.5px; font-weight: 500; line-height: 1.35; }
+    .cert-issuer { font-size: 12.5px; color: var(--ink-muted); margin-top: 3px; }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px; margin-top: 24px;
+    }
+    .contact-card {
+      display: flex; gap: 14px; align-items: center;
+      padding: 18px; border: 1px solid var(--line); border-radius: 10px;
+      background: var(--bg-elev); text-decoration: none; color: inherit;
+      transition: border-color .2s, transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s;
+    }
+    .contact-card:hover {
+      border-color: var(--accent); transform: translateY(-3px);
+      box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 10%, transparent);
+    }
+    .contact-card:hover .contact-icon {
+      background: var(--accent-soft); color: var(--accent); transform: rotate(-8deg);
+    }
+    .contact-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--chip); display: grid; place-items: center; color: var(--ink-soft);
+      flex-shrink: 0; transition: background .2s, color .2s, transform .3s cubic-bezier(.2,.8,.2,1);
+    }
+    .contact-label { font-size: 12.5px; color: var(--ink-muted); font-family: 'JetBrains Mono', monospace; }
+    .contact-val { font-size: 15px; font-weight: 500; margin-top: 3px; word-break: break-all; }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 0 60px; border-top: 1px solid var(--line);
+      color: var(--ink-muted); font-size: 13px; text-align: center;
+    }
+    footer .mono { color: var(--ink-soft); }
+
+    /* reveal */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+      .hero-blob { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      header.hero { padding: 88px 0 64px; }
+      section.wrap { padding: 64px 24px 52px; }
+      section.wrap + section.wrap { padding-top: 64px; }
+      .section-head { margin-bottom: 18px; }
+      .section-head h2 { font-size: 26px; }
+      .nav-links a:not(.theme-link) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand">ks<span class="dot">.</span></div>
+    <div class="nav-links">
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#experience" data-i18n="nav.experience">Experience</a>
+      <a href="#projects" data-i18n="nav.projects">Projects</a>
+      <a href="#education" data-i18n="nav.education">Education</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <button class="lang-btn" id="langBtn" aria-label="Toggle language">
+        <span id="langEn" class="lang-active">EN</span><span class="lang-sep">/</span><span id="langDe">DE</span>
+      </button>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap reveal">
+  <div class="hero-blob" aria-hidden="true"></div>
+  <div class="status"><span class="pulse"></span><span class="mono" data-i18n="hero.status">Open to AI / ML Engineer &amp; Data Scientist roles · Germany</span></div>
+  <h1>Kaustubh Salunke<span class="accent">.</span><span class="cursor" aria-hidden="true"></span></h1>
+  <p class="role" data-i18n="hero.role">AI / ML Engineer <span class="sep">/</span> Data Scientist <span class="sep">/</span> LLM &amp; Agentic Systems</p>
+  <p class="intro" data-i18n="hero.intro">I build production-grade GenAI and ML systems: Agentic RAG, multi-agent pipelines, LLM apps, and data pipelines with end-to-end ownership from architecture to cloud deployment. 2+ years at Accenture, currently completing an M.Sc. in Big Data &amp; AI at SRH Berlin.</p>
+  <div class="cta">
+    <a class="btn btn-primary" href="#contact"><span data-i18n="hero.cta_primary">Get in touch</span> <span class="arrow">→</span></a>
+    <a class="btn btn-ghost" href="#projects" data-i18n="hero.cta_secondary">View projects</a>
+  </div>
+</header>
+
+<section id="about" class="wrap reveal about">
+  <div class="section-head"><span class="num">01.</span><h2 data-i18n="sec.about">About</h2></div>
+  <p data-i18n="about.p1">I'm an AI / ML Engineer and Data Scientist based in Berlin, specializing in LLM application development, agentic systems, and production ML pipelines. At Accenture, I spent 2+ years engineering ML data pipelines and enterprise data systems, cutting processing time by 20% and earning the Accenture ACE Award for client outcomes.</p>
+  <p data-i18n="about.p2">These days I'm focused on the hard parts of putting LLMs and ML models in production: hybrid retrieval, self-correction loops, guardrails, observability, and evaluation harnesses. I care about systems that actually work under load, not demos.</p>
+</section>
+
+<section id="skills" class="wrap reveal">
+  <div class="section-head"><span class="num">02.</span><h2 data-i18n="sec.skills">Skills</h2></div>
+  <div class="skills-grid">
+    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_agentic">Agentic / LLM</div><div class="skill-items">LangGraph, LangChain, MCP, Agentic RAG, Hybrid Retrieval (Dense + BM25 + RRF), Cross-Encoder Reranking, Self-Correction Loops, Guardrails, RAGAS Evaluation</div></div>
+    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_models">Models</div><div class="skill-items">GPT-4o, Claude, Llama 3.1 (Groq), Hugging Face Transformers, Sentence-Transformers, PyTorch, TensorFlow, Scikit-learn</div></div>
+    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_retrieval">Retrieval</div><div class="skill-items">ChromaDB, FAISS, Pinecone, BM25 (rank-bm25), Tavily, tiktoken</div></div>
+    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_backend">Backend</div><div class="skill-items">Python, FastAPI, SSE Streaming, Pydantic, REST, Flask, SQL, Node.js</div></div>
+    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_mlops">MLOps</div><div class="skill-items">MLflow, Weights &amp; Biases, OpenTelemetry, Loguru, Evaluation Harnesses</div></div>
+    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_cloud">Cloud / DevOps</div><div class="skill-items">Docker, docker-compose, GitHub Actions, Kubernetes, Azure ML, Google Cloud AI, Render</div></div>
+    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_data">Data Eng</div><div class="skill-items">PySpark, Apache Airflow, Pandas, NumPy, n8n</div></div>
+    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_testing">Testing</div><div class="skill-items">pytest, pytest-asyncio, FakeLLM / FakeEmbeddings patterns, ruff, mypy</div></div>
+    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_languages">Languages</div><div class="skill-items" data-i18n="skills.v_languages">English (C2) · German (B1)</div></div>
+  </div>
+</section>
+
+<section id="experience" class="wrap reveal">
+  <div class="section-head"><span class="num">03.</span><h2 data-i18n="sec.experience">Experience</h2></div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-title"><span class="co">Accenture</span> · <span data-i18n="exp.acc_role">Associate Software Developer</span></div>
+      <div class="job-date">Feb 2023 – Sep 2024</div>
+    </div>
+    <div class="job-sub" data-i18n="exp.acc_sub">Machine Learning / Data Science · Enterprise Data & ML Pipeline Engineering · Pune, India</div>
+    <ul>
+      <li data-i18n="exp.acc_li1">Optimized Python-based ML data pipelines with vectorized operations, reducing end-to-end processing time by <strong>20%</strong>.</li>
+      <li data-i18n="exp.acc_li2">Engineered feature-ready datasets from structured enterprise data (imputation, encoding, normalization) powering predictive modeling and automated decisioning.</li>
+      <li data-i18n="exp.acc_li3">Refactored Python and SQL pipelines to modularize transformation logic and optimize query execution, improving system reliability at scale.</li>
+      <li data-i18n="exp.acc_li4">Recognized with the <strong>Accenture ACE (Extra Mile) Award</strong> for delivering exceptional client outcomes.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-title"><span class="co">Ethnus</span> · <span data-i18n="exp.eth_role">Software Developer Intern</span></div>
+      <div class="job-date">Jul 2022 – Sep 2022</div>
+    </div>
+    <div class="job-sub" data-i18n="exp.eth_sub">Bangalore, India</div>
+    <ul>
+      <li data-i18n="exp.eth_li1">Reduced manual reporting effort by building SQL workflows for internal business applications.</li>
+      <li data-i18n="exp.eth_li2">Resolved UI/UX friction in an instructor-facing internal tool, improving task completion flow.</li>
+      <li data-i18n="exp.eth_li3">Contributed to Agile sprint cycles (standups, planning, retrospectives) shipping features on schedule.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects" class="wrap reveal">
+  <div class="section-head"><span class="num">04.</span><h2 data-i18n="sec.projects">Projects</h2></div>
+  <div class="projects">
+
+    <div class="card">
+      <div class="card-head">
+        <h3 data-i18n="proj.rag_title">Agentic RAG Platform</h3>
+        <span class="tag">GenAI</span>
+      </div>
+      <p data-i18n="proj.rag_desc">Production-grade Agentic RAG as a LangGraph state machine with self-correction loops: router, query rewriter, retrieve, rerank, grade, web-search fallback, generate, reflect. Hybrid retrieval (ChromaDB + BM25 + RRF) with cross-encoder reranking. InputGuard for PII / prompt injection, OutputGuard for faithfulness, RAGAS harness, OpenTelemetry on every node. Shipped with FastAPI + SSE, stdio MCP server, Streamlit UI, Docker.</p>
+      <div class="stack">
+        <span>LangGraph</span><span>FastAPI</span><span>MCP</span><span>ChromaDB</span><span>BM25</span><span>OpenTelemetry</span><span>Docker</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3 data-i18n="proj.inv_title">AI Investment Research Assistant</h3>
+        <span class="tag">Multi-Agent</span>
+      </div>
+      <p data-i18n="proj.inv_desc">Parallel multi-agent system where News Scout, Analyst, and Sentiment Judge fan out concurrently across Google News, yfinance, SEC EDGAR (10-K/10-Q/8-K), and Reddit, then synchronize to produce BUY / HOLD / SELL verdicts with bull case, bear case, and risks. Partial-failure tolerance, SHA-256 disk cache with TTL, pluggable LLM factory, and a self-contained HTML brief with Plotly charts and filterable source tables.</p>
+      <div class="stack">
+        <span>LangGraph</span><span>LangChain</span><span>yfinance</span><span>SEC EDGAR</span><span>Plotly</span><span>Jinja2</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3 data-i18n="proj.pizza_title">AI Pizza Ordering Assistant</h3>
+        <span class="tag">Conv. Agent</span>
+      </div>
+      <p data-i18n="proj.pizza_desc">Conversational agent for a pizza delivery service. Designed a dialog flowchart and implemented a structured prompt-driven system to manage real-time customer interactions (menu validation, special requests like allergies and vegan, delivery address collection) outputting clean JSON orders. Also built a voice-enabled variant.</p>
+      <div class="stack">
+        <span>Python</span><span>LLM</span><span>Prompt Engineering</span><span>Voice I/O</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3 data-i18n="proj.neural_title">Neural Time-Series Forecasting for Stocks</h3>
+        <span class="tag">Deep Learning</span>
+      </div>
+      <p data-i18n="proj.neural_desc">ML pipeline for stock market forecasting on historical price and volume data. Feature engineering with technical indicators (MA, RSI, MACD), baseline models (Logistic Regression, Random Forest), then sequence models (LSTM / GRU). Proper time-series validation, classification metrics plus trading KPIs (Sharpe ratio, cumulative returns), and simple backtesting simulation.</p>
+      <div class="stack">
+        <span>PyTorch</span><span>LSTM</span><span>Pandas</span><span>Scikit-learn</span><span>Backtesting</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3 data-i18n="proj.churn_title">Customer Churn Prediction, End-to-End ML</h3>
+        <span class="tag">Classical ML</span>
+      </div>
+      <p data-i18n="proj.churn_desc">End-to-end churn prediction pipeline covering EDA, feature engineering, class imbalance handling (SMOTE), and comparison across Logistic Regression, XGBoost, and LightGBM. SHAP for explainability, MLflow for experiment tracking, FastAPI for serving, and a lightweight Streamlit dashboard for business stakeholders.</p>
+      <div class="stack">
+        <span>XGBoost</span><span>SHAP</span><span>MLflow</span><span>FastAPI</span><span>Streamlit</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3 data-i18n="proj.retail_title">Retail Demand Forecasting</h3>
+        <span class="tag">Forecasting</span>
+      </div>
+      <p data-i18n="proj.retail_desc">Hierarchical demand forecasting across SKU × store × week. Baselines (naive, ETS, Prophet) vs. gradient-boosted trees (LightGBM) with lag and rolling features, then a Temporal Fusion Transformer for the top tier. Cross-validation with expanding window, MAPE / WAPE metrics, and a reconciliation step across the hierarchy.</p>
+      <div class="stack">
+        <span>Prophet</span><span>LightGBM</span><span>PyTorch</span><span>Pandas</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="education" class="wrap reveal">
+  <div class="section-head"><span class="num">05.</span><h2 data-i18n="sec.education">Education</h2></div>
+
+  <div class="edu-item">
+    <div class="edu-head">
+      <div>
+        <div class="edu-school">SRH Berlin University of Applied Sciences</div>
+        <div class="edu-degree" data-i18n="edu.srh_degree">M.Sc. Big Data &amp; Artificial Intelligence · GPA 1.7 (German scale, equivalent to Distinction)</div>
+      </div>
+      <div class="edu-date" data-i18n="edu.srh_date">Oct 2024 – Present</div>
+    </div>
+  </div>
+
+  <div class="edu-item">
+    <div class="edu-head">
+      <div>
+        <div class="edu-school">Pune University</div>
+        <div class="edu-degree" data-i18n="edu.pune_degree">B.Sc. Mechanical Engineering · GPA 7.64 / 10</div>
+      </div>
+      <div class="edu-date">Aug 2017 – Jul 2022</div>
+    </div>
+  </div>
+</section>
+
+<section id="certificates" class="wrap reveal">
+  <div class="section-head"><span class="num">06.</span><h2 data-i18n="sec.certifications">Certifications</h2></div>
+  <div class="certs">
+
+    <div class="cert">
+      <div class="cert-icon">AZ</div>
+      <div>
+        <div class="cert-name">Azure Administrator Associate (AZ-104)</div>
+        <div class="cert-issuer">Microsoft</div>
+      </div>
+    </div>
+
+    <div class="cert">
+      <div class="cert-icon">AI</div>
+      <div>
+        <div class="cert-name">Azure AI Fundamentals (AI-900)</div>
+        <div class="cert-issuer">Microsoft</div>
+      </div>
+    </div>
+
+    <div class="cert">
+      <div class="cert-icon">AZ</div>
+      <div>
+        <div class="cert-name">Azure Fundamentals (AZ-900)</div>
+        <div class="cert-issuer">Microsoft</div>
+      </div>
+    </div>
+
+    <div class="cert">
+      <div class="cert-icon">GCP</div>
+      <div>
+        <div class="cert-name">Cloud Digital Leader</div>
+        <div class="cert-issuer">Google Cloud</div>
+      </div>
+    </div>
+
+    <div class="cert">
+      <div class="cert-icon">ML</div>
+      <div>
+        <div class="cert-name">Machine Learning Specialization</div>
+        <div class="cert-issuer">Stanford / DeepLearning.AI · Coursera</div>
+      </div>
+    </div>
+
+    <div class="cert">
+      <div class="cert-icon">MA</div>
+      <div>
+        <div class="cert-name">Mathematics for Machine Learning & Data Science</div>
+        <div class="cert-issuer">DeepLearning.AI · Coursera</div>
+      </div>
+    </div>
+
+    <div class="cert">
+      <div class="cert-icon">AP</div>
+      <div>
+        <div class="cert-name">Certified Associate Developer</div>
+        <div class="cert-issuer">Appian</div>
+      </div>
+    </div>
+
+    <div class="cert">
+      <div class="cert-icon">GO</div>
+      <div>
+        <div class="cert-name">Foundations: Data, Data, Everywhere</div>
+        <div class="cert-issuer">Google · Coursera</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact" class="wrap reveal">
+  <div class="section-head"><span class="num">07.</span><h2 data-i18n="sec.contact">Contact</h2></div>
+  <p style="color: var(--ink-soft); max-width: 580px;" data-i18n="contact.intro">The fastest way to reach me is email. Open to AI Engineer, ML Engineer, and Data Scientist roles in Berlin or remote.</p>
+  <div class="contact-grid">
+    <a class="contact-card" href="mailto:kaustubh.v.salunke@gmail.com">
+      <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+      <div>
+        <div class="contact-label" data-i18n="contact.email">email</div>
+        <div class="contact-val">kaustubh.v.salunke@gmail.com</div>
+      </div>
+    </a>
+
+    <a class="contact-card" href="tel:+4915222128451">
+      <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+      <div>
+        <div class="contact-label" data-i18n="contact.phone">phone</div>
+        <div class="contact-val">+49 152 2212 8451</div>
+      </div>
+    </a>
+
+    <a class="contact-card" href="https://www.linkedin.com/in/kaustubh-salunke-a4264619a/" target="_blank" rel="noopener">
+      <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+      <div>
+        <div class="contact-label" data-i18n="contact.linkedin">linkedin</div>
+        <div class="contact-val">in/kaustubhsalunke</div>
+      </div>
+    </a>
+
+    <a class="contact-card" href="https://github.com/kausta1011" target="_blank" rel="noopener">
+      <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+      <div>
+        <div class="contact-label" data-i18n="contact.github">github</div>
+        <div class="contact-val">github.com/kausta1011</div>
+      </div>
+    </a>
+
+    <div class="contact-card" style="cursor: default;">
+      <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div>
+        <div class="contact-label" data-i18n="contact.location">location</div>
+        <div class="contact-val" data-i18n="contact.location_val">Berlin, Germany</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="mono" data-i18n="footer.built">&lt;/&gt; Built with HTML, CSS & care</div>
+  <div style="margin-top: 6px;">© 2026 Kaustubh Salunke</div>
+</footer>
+
+<script>
+  // Theme toggle
+  const themeBtn = document.getElementById('themeBtn');
+  let dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const applyTheme = () => document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  applyTheme();
+  themeBtn.addEventListener('click', () => { dark = !dark; applyTheme(); });
+
+  // i18n — EN / DE toggle
+  // Keep tech stack tags, project codenames and tool names in English (standard in German tech).
+  const I18N = {
+    'nav.about':      { en: 'About',        de: 'Über mich' },
+    'nav.experience': { en: 'Experience',   de: 'Erfahrung' },
+    'nav.projects':   { en: 'Projects',     de: 'Projekte' },
+    'nav.education':  { en: 'Education',    de: 'Ausbildung' },
+    'nav.contact':    { en: 'Contact',      de: 'Kontakt' },
+
+    'hero.status': {
+      en: 'Open to AI / ML Engineer &amp; Data Scientist roles · Germany',
+      de: 'Offen für Positionen als AI / ML Engineer &amp; Data Scientist · Deutschland'
+    },
+    'hero.role': {
+      en: 'AI / ML Engineer <span class="sep">/</span> Data Scientist <span class="sep">/</span> LLM &amp; Agentic Systems',
+      de: 'AI / ML Engineer <span class="sep">/</span> Data Scientist <span class="sep">/</span> LLM &amp; Agentic Systems'
+    },
+    'hero.intro': {
+      en: 'I build production-grade GenAI and ML systems: Agentic RAG, multi-agent pipelines, LLM apps, and data pipelines with end-to-end ownership from architecture to cloud deployment. 2+ years at Accenture, currently completing an M.Sc. in Big Data &amp; AI at SRH Berlin.',
+      de: 'Ich baue produktionsreife GenAI- und ML-Systeme: Agentic RAG, Multi-Agent-Pipelines, LLM-Anwendungen und Datenpipelines mit End-to-End-Verantwortung von der Architektur bis zum Cloud-Deployment. 2+ Jahre bei Accenture, aktuell Abschluss des M.Sc. in Big Data &amp; AI an der SRH Berlin.'
+    },
+    'hero.cta_primary':   { en: 'Get in touch',   de: 'Kontakt aufnehmen' },
+    'hero.cta_secondary': { en: 'View projects',  de: 'Projekte ansehen' },
+
+    'sec.about':          { en: 'About',          de: 'Über mich' },
+    'sec.skills':         { en: 'Skills',         de: 'Fähigkeiten' },
+    'sec.experience':     { en: 'Experience',     de: 'Berufserfahrung' },
+    'sec.projects':       { en: 'Projects',       de: 'Projekte' },
+    'sec.education':      { en: 'Education',      de: 'Ausbildung' },
+    'sec.certifications': { en: 'Certifications', de: 'Zertifikate' },
+    'sec.contact':        { en: 'Contact',        de: 'Kontakt' },
+
+    'about.p1': {
+      en: "I'm an AI / ML Engineer and Data Scientist based in Berlin, specializing in LLM application development, agentic systems, and production ML pipelines. At Accenture, I spent 2+ years engineering ML data pipelines and enterprise data systems, cutting processing time by 20% and earning the Accenture ACE Award for client outcomes.",
+      de: 'Ich bin AI / ML Engineer und Data Scientist mit Sitz in Berlin, spezialisiert auf LLM-Anwendungsentwicklung, agentische Systeme und produktive ML-Pipelines. Bei Accenture habe ich 2+ Jahre ML-Datenpipelines und Enterprise-Datensysteme entwickelt, die Verarbeitungszeit um 20 % reduziert und den Accenture ACE Award für herausragende Kundenergebnisse erhalten.'
+    },
+    'about.p2': {
+      en: "These days I'm focused on the hard parts of putting LLMs and ML models in production: hybrid retrieval, self-correction loops, guardrails, observability, and evaluation harnesses. I care about systems that actually work under load, not demos.",
+      de: 'Mein aktueller Fokus liegt auf den anspruchsvollen Aspekten des produktiven Einsatzes von LLMs und ML-Modellen: Hybrid Retrieval, Self-Correction Loops, Guardrails, Observability und Evaluation Harnesses. Mir geht es um Systeme, die unter Last zuverlässig funktionieren, nicht um Demos.'
+    },
+
+    'skills.l_agentic':   { en: 'Agentic / LLM',   de: 'Agentisch / LLM' },
+    'skills.l_models':    { en: 'Models',          de: 'Modelle' },
+    'skills.l_retrieval': { en: 'Retrieval',       de: 'Retrieval' },
+    'skills.l_backend':   { en: 'Backend',         de: 'Backend' },
+    'skills.l_mlops':     { en: 'MLOps',           de: 'MLOps' },
+    'skills.l_cloud':     { en: 'Cloud / DevOps',  de: 'Cloud / DevOps' },
+    'skills.l_data':      { en: 'Data Eng',        de: 'Data Engineering' },
+    'skills.l_testing':   { en: 'Testing',         de: 'Testing' },
+    'skills.l_languages': { en: 'Languages',       de: 'Sprachen' },
+    'skills.v_languages': { en: 'English (C2) · German (B1)', de: 'Englisch (C2) · Deutsch (B1)' },
+
+    'exp.acc_role': { en: 'Associate Software Developer', de: 'Associate Software Developer' },
+    'exp.acc_sub': {
+      en: 'Machine Learning / Data Science · Enterprise Data & ML Pipeline Engineering · Pune, India',
+      de: 'Machine Learning / Data Science · Enterprise-Daten- & ML-Pipeline-Engineering · Pune, Indien'
+    },
+    'exp.acc_li1': {
+      en: 'Optimized Python-based ML data pipelines with vectorized operations, reducing end-to-end processing time by <strong>20%</strong>.',
+      de: 'Python-basierte ML-Datenpipelines mit vektorisierten Operationen optimiert und die End-to-End-Verarbeitungszeit um <strong>20 %</strong> reduziert.'
+    },
+    'exp.acc_li2': {
+      en: 'Engineered feature-ready datasets from structured enterprise data (imputation, encoding, normalization) powering predictive modeling and automated decisioning.',
+      de: 'Feature-fertige Datensätze aus strukturierten Enterprise-Daten (Imputation, Encoding, Normalisierung) entwickelt, die Predictive Modeling und automatisierte Entscheidungsprozesse unterstützen.'
+    },
+    'exp.acc_li3': {
+      en: 'Refactored Python and SQL pipelines to modularize transformation logic and optimize query execution, improving system reliability at scale.',
+      de: 'Python- und SQL-Pipelines refaktoriert, um Transformationslogik zu modularisieren und die Query-Ausführung zu optimieren – mit verbesserter Zuverlässigkeit im großen Maßstab.'
+    },
+    'exp.acc_li4': {
+      en: 'Recognized with the <strong>Accenture ACE (Extra Mile) Award</strong> for delivering exceptional client outcomes.',
+      de: 'Ausgezeichnet mit dem <strong>Accenture ACE (Extra Mile) Award</strong> für herausragende Kundenergebnisse.'
+    },
+    'exp.eth_role': { en: 'Software Developer Intern', de: 'Praktikant Softwareentwicklung' },
+    'exp.eth_sub':  { en: 'Bangalore, India',          de: 'Bangalore, Indien' },
+    'exp.eth_li1': {
+      en: 'Reduced manual reporting effort by building SQL workflows for internal business applications.',
+      de: 'Manuellen Reporting-Aufwand reduziert durch den Aufbau von SQL-Workflows für interne Business-Anwendungen.'
+    },
+    'exp.eth_li2': {
+      en: 'Resolved UI/UX friction in an instructor-facing internal tool, improving task completion flow.',
+      de: 'UI/UX-Reibungspunkte in einem internen Tool für Trainer behoben und den Aufgaben-Flow verbessert.'
+    },
+    'exp.eth_li3': {
+      en: 'Contributed to Agile sprint cycles (standups, planning, retrospectives) shipping features on schedule.',
+      de: 'An agilen Sprint-Zyklen mitgewirkt (Standups, Planning, Retrospektiven) und Features termingerecht ausgeliefert.'
+    },
+
+    'proj.rag_title': { en: 'Agentic RAG Platform', de: 'Agentic-RAG-Plattform' },
+    'proj.rag_desc': {
+      en: 'Production-grade Agentic RAG as a LangGraph state machine with self-correction loops: router, query rewriter, retrieve, rerank, grade, web-search fallback, generate, reflect. Hybrid retrieval (ChromaDB + BM25 + RRF) with cross-encoder reranking. InputGuard for PII / prompt injection, OutputGuard for faithfulness, RAGAS harness, OpenTelemetry on every node. Shipped with FastAPI + SSE, stdio MCP server, Streamlit UI, Docker.',
+      de: 'Produktionsreifes Agentic RAG als LangGraph-State-Machine mit Self-Correction Loops: Router, Query Rewriter, Retrieve, Rerank, Grade, Websuche-Fallback, Generate, Reflect. Hybrid Retrieval (ChromaDB + BM25 + RRF) mit Cross-Encoder-Reranking. InputGuard für PII / Prompt Injection, OutputGuard für Faithfulness, RAGAS-Harness, OpenTelemetry auf jedem Node. Ausgeliefert mit FastAPI + SSE, stdio-MCP-Server, Streamlit-UI, Docker.'
+    },
+    'proj.inv_title': { en: 'AI Investment Research Assistant', de: 'KI-Investment-Research-Assistent' },
+    'proj.inv_desc': {
+      en: 'Parallel multi-agent system where News Scout, Analyst, and Sentiment Judge fan out concurrently across Google News, yfinance, SEC EDGAR (10-K/10-Q/8-K), and Reddit, then synchronize to produce BUY / HOLD / SELL verdicts with bull case, bear case, and risks. Partial-failure tolerance, SHA-256 disk cache with TTL, pluggable LLM factory, and a self-contained HTML brief with Plotly charts and filterable source tables.',
+      de: 'Paralleles Multi-Agent-System, bei dem News Scout, Analyst und Sentiment Judge gleichzeitig Google News, yfinance, SEC EDGAR (10-K/10-Q/8-K) und Reddit abfragen und dann synchronisieren, um BUY / HOLD / SELL-Empfehlungen mit Bull Case, Bear Case und Risiken zu erzeugen. Partial-Failure-Toleranz, SHA-256-Disk-Cache mit TTL, austauschbare LLM-Factory und ein eigenständiges HTML-Briefing mit Plotly-Charts und filterbaren Quelltabellen.'
+    },
+    'proj.pizza_title': { en: 'AI Pizza Ordering Assistant', de: 'KI-Pizza-Bestellassistent' },
+    'proj.pizza_desc': {
+      en: 'Conversational agent for a pizza delivery service. Designed a dialog flowchart and implemented a structured prompt-driven system to manage real-time customer interactions (menu validation, special requests like allergies and vegan, delivery address collection) outputting clean JSON orders. Also built a voice-enabled variant.',
+      de: 'Conversational Agent für einen Pizza-Lieferservice. Dialog-Flowchart entworfen und ein strukturiertes, prompt-getriebenes System implementiert, das Kundeninteraktionen in Echtzeit steuert (Menüvalidierung, Sonderwünsche wie Allergien und vegan, Erfassung der Lieferadresse) und saubere JSON-Bestellungen erzeugt. Zusätzlich eine sprachgesteuerte Variante entwickelt.'
+    },
+    'proj.neural_title': { en: 'Neural Time-Series Forecasting for Stocks', de: 'Neuronale Zeitreihen-Prognose für Aktien' },
+    'proj.neural_desc': {
+      en: 'ML pipeline for stock market forecasting on historical price and volume data. Feature engineering with technical indicators (MA, RSI, MACD), baseline models (Logistic Regression, Random Forest), then sequence models (LSTM / GRU). Proper time-series validation, classification metrics plus trading KPIs (Sharpe ratio, cumulative returns), and simple backtesting simulation.',
+      de: 'ML-Pipeline für Aktienmarkt-Prognosen auf Basis historischer Kurs- und Volumendaten. Feature Engineering mit technischen Indikatoren (MA, RSI, MACD), Baseline-Modelle (Logistische Regression, Random Forest), anschließend Sequenzmodelle (LSTM / GRU). Saubere Zeitreihen-Validierung, Klassifikationsmetriken sowie Trading-KPIs (Sharpe Ratio, kumulierte Renditen) und eine einfache Backtesting-Simulation.'
+    },
+    'proj.churn_title': { en: 'Customer Churn Prediction, End-to-End ML', de: 'Kunden-Churn-Prognose, End-to-End-ML' },
+    'proj.churn_desc': {
+      en: 'End-to-end churn prediction pipeline covering EDA, feature engineering, class imbalance handling (SMOTE), and comparison across Logistic Regression, XGBoost, and LightGBM. SHAP for explainability, MLflow for experiment tracking, FastAPI for serving, and a lightweight Streamlit dashboard for business stakeholders.',
+      de: 'End-to-End-Churn-Prognose-Pipeline mit EDA, Feature Engineering, Behandlung von Klassenungleichgewicht (SMOTE) und Vergleich von Logistischer Regression, XGBoost und LightGBM. SHAP für Erklärbarkeit, MLflow für Experiment-Tracking, FastAPI für das Serving und ein leichtgewichtiges Streamlit-Dashboard für Fachbereichs-Stakeholder.'
+    },
+    'proj.retail_title': { en: 'Retail Demand Forecasting', de: 'Retail-Nachfrageprognose' },
+    'proj.retail_desc': {
+      en: 'Hierarchical demand forecasting across SKU × store × week. Baselines (naive, ETS, Prophet) vs. gradient-boosted trees (LightGBM) with lag and rolling features, then a Temporal Fusion Transformer for the top tier. Cross-validation with expanding window, MAPE / WAPE metrics, and a reconciliation step across the hierarchy.',
+      de: 'Hierarchische Nachfrageprognose über SKU × Filiale × Woche. Baselines (Naive, ETS, Prophet) im Vergleich zu Gradient-Boosted Trees (LightGBM) mit Lag- und Rolling-Features, ergänzt durch einen Temporal Fusion Transformer für die oberste Ebene. Cross-Validation mit Expanding Window, MAPE- / WAPE-Metriken und ein Reconciliation-Schritt über die Hierarchie.'
+    },
+
+    'edu.srh_degree': {
+      en: 'M.Sc. Big Data &amp; Artificial Intelligence · GPA 1.7 (German scale, equivalent to Distinction)',
+      de: 'M.Sc. Big Data &amp; Künstliche Intelligenz · Notendurchschnitt 1,7 (deutsche Skala, entspricht „mit Auszeichnung“)'
+    },
+    'edu.srh_date':   { en: 'Oct 2024 – Present',   de: 'Okt 2024 – heute' },
+    'edu.pune_degree': {
+      en: 'B.Sc. Mechanical Engineering · GPA 7.64 / 10',
+      de: 'B.Sc. Maschinenbau · Notendurchschnitt 7,64 / 10'
+    },
+
+    'contact.intro': {
+      en: 'The fastest way to reach me is email. Open to AI Engineer, ML Engineer, and Data Scientist roles in Berlin or remote.',
+      de: 'Am schnellsten bin ich per E-Mail erreichbar. Offen für Positionen als AI Engineer, ML Engineer und Data Scientist in Berlin oder remote.'
+    },
+    'contact.email':        { en: 'email',    de: 'e-mail' },
+    'contact.phone':        { en: 'phone',    de: 'telefon' },
+    'contact.linkedin':     { en: 'linkedin', de: 'linkedin' },
+    'contact.github':       { en: 'github',   de: 'github' },
+    'contact.location':     { en: 'location', de: 'standort' },
+    'contact.location_val': { en: 'Berlin, Germany', de: 'Berlin, Deutschland' },
+
+    'footer.built': {
+      en: '&lt;/&gt; Built with HTML, CSS & care',
+      de: '&lt;/&gt; Mit HTML, CSS und Sorgfalt gebaut'
+    }
+  };
+
+  const langBtn = document.getElementById('langBtn');
+  const langEn = document.getElementById('langEn');
+  const langDe = document.getElementById('langDe');
+  let currentLang = 'en';
+
+  const applyLang = (lang) => {
+    currentLang = lang;
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const entry = I18N[key];
+      if (entry && entry[lang] !== undefined) el.innerHTML = entry[lang];
+    });
+    if (lang === 'de') {
+      langDe.classList.add('lang-active');
+      langEn.classList.remove('lang-active');
+    } else {
+      langEn.classList.add('lang-active');
+      langDe.classList.remove('lang-active');
+    }
+  };
+  langBtn.addEventListener('click', () => applyLang(currentLang === 'en' ? 'de' : 'en'));
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }});
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Scroll progress bar
+  const progress = document.getElementById('progress');
+  const updateProgress = () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+    progress.style.width = Math.min(100, Math.max(0, scrolled * 100)) + '%';
+  };
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+
+</body>
+</html>
