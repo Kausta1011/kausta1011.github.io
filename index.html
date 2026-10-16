@@ -3,39 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Kaustubh Salunke · AI / ML Engineer & Data Scientist specializing in LLM apps, Agentic RAG, and MLOps. Berlin-based." />
+  <meta name="description" content="Kaustubh Salunke · AI / ML Engineer & Data Scientist. M.Sc. Big Data & AI (SRH Berlin). LLM agents, Agentic RAG, multi-agent systems and MLOps. Berlin-based." />
   <title>Kaustubh Salunke · AI / ML Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    // Mark JS as available (reveal animations are gated on it) and restore the saved theme early to avoid a flash.
+    document.documentElement.classList.add('js');
+    try { const t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
   <style>
     :root {
-      --bg: #fafaf7;
+      --bg: #f7f5f0;
       --bg-elev: #ffffff;
-      --ink: #111111;
-      --ink-soft: #55585c;
-      --ink-muted: #8a8e94;
-      --line: #e8e6df;
-      --accent: #ff5722;
-      --accent-soft: #fff1ec;
-      --chip: #f2efe7;
-      --shadow: 0 1px 2px rgba(17,17,17,.04), 0 8px 24px rgba(17,17,17,.05);
-      --radius: 14px;
+      --bg-sunk: #efece4;
+      --ink: #15151a;
+      --ink-soft: #4f5259;
+      --ink-muted: #85888f;
+      --line: #e3dfd5;
+      --line-strong: #d2cdc0;
+      --accent: #e8552a;
+      --accent-2: #7c5cff;
+      --accent-soft: #fdeee8;
+      --good: #16a34a;
+      --chip: #f0ece3;
+      --grid: rgba(21,21,26,.045);
+      --shadow: 0 1px 2px rgba(21,21,26,.04), 0 10px 30px rgba(21,21,26,.06);
+      --radius: 18px;
+      color-scheme: light;
     }
-    [data-theme="dark"] {
-      --bg: #0d0d0f;
-      --bg-elev: #16161a;
-      --ink: #f4f4f2;
-      --ink-soft: #b5b8be;
-      --ink-muted: #7a7d85;
-      --line: #26262c;
-      --accent: #ff7a4a;
-      --accent-soft: #281912;
-      --chip: #1e1e24;
-      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0b0b0e;
+        --bg-elev: #141419;
+        --bg-sunk: #101014;
+        --ink: #f3f2ee;
+        --ink-soft: #b4b6bd;
+        --ink-muted: #7b7e87;
+        --line: #24242b;
+        --line-strong: #33333c;
+        --accent: #ff7a4d;
+        --accent-2: #9b85ff;
+        --accent-soft: #2a1912;
+        --good: #34d399;
+        --chip: #1c1c22;
+        --grid: rgba(255,255,255,.035);
+        --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+        color-scheme: dark;
+      }
     }
+    :root[data-theme="dark"] {
+      --bg: #0b0b0e;
+      --bg-elev: #141419;
+      --bg-sunk: #101014;
+      --ink: #f3f2ee;
+      --ink-soft: #b4b6bd;
+      --ink-muted: #7b7e87;
+      --line: #24242b;
+      --line-strong: #33333c;
+      --accent: #ff7a4d;
+      --accent-2: #9b85ff;
+      --accent-soft: #2a1912;
+      --good: #34d399;
+      --chip: #1c1c22;
+      --grid: rgba(255,255,255,.035);
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+      color-scheme: dark;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: var(--bg);
@@ -43,349 +81,417 @@
       line-height: 1.65;
       font-size: 17px;
       -webkit-font-smoothing: antialiased;
-      transition: background .25s ease, color .25s ease;
+      overflow-x: hidden;
+      transition: background .3s ease, color .3s ease;
     }
+    ::selection { background: color-mix(in srgb, var(--accent) 30%, transparent); }
+    a { color: inherit; }
     .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
-    .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
 
     /* PROGRESS */
     .progress {
-      position: fixed; top: 0; left: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 40%, transparent));
-      width: 0%; z-index: 100; transition: width .1s linear;
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%; z-index: 100;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
     }
 
     /* NAV */
     nav {
       position: sticky; top: 0; z-index: 50;
-      backdrop-filter: blur(12px);
-      background: color-mix(in srgb, var(--bg) 80%, transparent);
-      border-bottom: 1px solid var(--line);
+      backdrop-filter: saturate(1.4) blur(14px);
+      -webkit-backdrop-filter: saturate(1.4) blur(14px);
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      border-bottom: 1px solid transparent;
+      transition: border-color .3s;
     }
+    nav.scrolled { border-bottom-color: var(--line); }
     .nav-inner {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 24px; max-width: 960px; margin: 0 auto;
+      padding: 14px 24px; max-width: 1040px; margin: 0 auto;
     }
-    .brand { font-weight: 700; letter-spacing: -.01em; font-size: 15px; }
+    .brand {
+      font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; line-height: 1;
+      text-decoration: none; letter-spacing: -.01em;
+    }
     .brand .dot { color: var(--accent); }
-    .nav-links { display: flex; gap: 22px; align-items: center; }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
     .nav-links a {
       color: var(--ink-soft); text-decoration: none; font-size: 14.5px; font-weight: 500;
       transition: color .15s; position: relative; padding-bottom: 2px;
     }
     .nav-links a::after {
-      content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+      content: ""; position: absolute; left: 0; right: 0; bottom: -2px;
       height: 1.5px; background: var(--accent); transform: scaleX(0);
       transform-origin: right; transition: transform .3s cubic-bezier(.2,.8,.2,1);
     }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
-    .theme-btn {
-      background: none; border: 1px solid var(--line); border-radius: 999px;
-      width: 32px; height: 32px; cursor: pointer; color: var(--ink-soft);
-      display: grid; place-items: center; transition: all .25s cubic-bezier(.2,.8,.2,1);
-    }
-    .theme-btn:hover { border-color: var(--accent); color: var(--accent); transform: rotate(20deg); }
-    .theme-btn:active { transform: rotate(180deg); }
-    .lang-btn {
-      background: none; border: 1px solid var(--line); border-radius: 999px;
-      height: 32px; padding: 0 10px; cursor: pointer; color: var(--ink-soft);
-      font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 500;
-      letter-spacing: .04em;
-      display: inline-flex; align-items: center; gap: 6px;
+    .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: left; }
+    .nav-tools { display: flex; gap: 8px; align-items: center; margin-left: 8px; }
+    .theme-btn, .lang-btn {
+      background: var(--bg-elev); border: 1px solid var(--line); border-radius: 999px;
+      height: 34px; cursor: pointer; color: var(--ink-soft);
       transition: all .25s cubic-bezier(.2,.8,.2,1);
+    }
+    .theme-btn { width: 34px; display: grid; place-items: center; }
+    .theme-btn:hover { border-color: var(--accent); color: var(--accent); transform: rotate(20deg); }
+    .lang-btn {
+      padding: 0 11px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 500;
+      letter-spacing: .04em; display: inline-flex; align-items: center; gap: 6px;
     }
     .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
     .lang-btn .lang-active { color: var(--ink); font-weight: 700; }
     .lang-btn:hover .lang-active { color: var(--accent); }
     .lang-btn .lang-sep { opacity: .4; }
+    .icon-sun { display: none; }
+    :root[data-theme="dark"] .icon-sun { display: block; }
+    :root[data-theme="dark"] .icon-moon { display: none; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .icon-sun { display: block; }
+      :root:not([data-theme="light"]) .icon-moon { display: none; }
+    }
 
     /* HERO */
-    header.hero { padding: 112px 0 48px; }
-    .hero-blob {
-      position: absolute; top: -120px; right: -120px;
-      width: 480px; height: 480px; border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 60%);
-      filter: blur(60px); z-index: 0; pointer-events: none;
-      animation: float 14s ease-in-out infinite;
+    header.hero {
+      position: relative; padding: 120px 0 96px; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 75%);
+    }
+    .orb {
+      position: absolute; border-radius: 50%; filter: blur(70px); z-index: 0; pointer-events: none;
+      opacity: .55;
+    }
+    .orb-1 {
+      width: 460px; height: 460px; top: -140px; right: -80px;
+      background: radial-gradient(circle, color-mix(in srgb, var(--accent) 60%, transparent), transparent 65%);
+      animation: float 16s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 380px; height: 380px; top: 120px; right: 260px;
+      background: radial-gradient(circle, color-mix(in srgb, var(--accent-2) 45%, transparent), transparent 65%);
+      animation: float 20s ease-in-out infinite reverse;
     }
     @keyframes float {
       0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(-30px, 20px) scale(1.06); }
-      66% { transform: translate(20px, -30px) scale(.95); }
+      33% { transform: translate(-30px, 24px) scale(1.06); }
+      66% { transform: translate(24px, -28px) scale(.95); }
     }
-    header.hero > *:not(.hero-blob) { position: relative; z-index: 1; }
+    .hero .wrap { position: relative; z-index: 1; }
     .status {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 12px; border: 1px solid var(--line);
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 7px 14px; border: 1px solid var(--line);
       border-radius: 999px; font-size: 12px; color: var(--ink-soft);
-      background: var(--bg-elev);
-      margin-bottom: 20px;
-      animation: fadeSlideUp .6s ease both;
-    }
-    @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: none; }
+      background: color-mix(in srgb, var(--bg-elev) 80%, transparent);
+      margin-bottom: 28px; box-shadow: var(--shadow);
     }
     .status .pulse {
-      width: 7px; height: 7px; background: #22c55e; border-radius: 50%;
-      box-shadow: 0 0 0 0 rgba(34,197,94,.6); animation: pulse 2s infinite;
+      width: 7px; height: 7px; background: var(--good); border-radius: 50%;
+      animation: pulse 2s infinite;
     }
     @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(34,197,94,.5); }
-      70% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
-      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+      0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--good) 55%, transparent); }
+      70% { box-shadow: 0 0 0 8px transparent; }
+      100% { box-shadow: 0 0 0 0 transparent; }
     }
     h1 {
-      font-size: clamp(40px, 6vw, 64px);
-      font-weight: 800; letter-spacing: -.035em; line-height: 1.05;
-      margin-bottom: 18px;
-      animation: fadeSlideUp .7s ease .1s both;
+      font-size: clamp(48px, 8.5vw, 96px);
+      font-weight: 600; letter-spacing: -.045em; line-height: .98;
+      margin-bottom: 26px;
     }
-    h1 .accent { color: var(--accent); }
-    h1 .cursor {
-      display: inline-block; width: .08em; height: .9em;
-      background: var(--accent); vertical-align: -0.08em;
-      margin-left: 4px; animation: blink 1.1s step-end infinite;
+    h1 .serif {
+      font-style: italic; letter-spacing: -.02em; font-weight: 400;
+      background: linear-gradient(100deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      padding-right: .08em;
     }
-    @keyframes blink { 50% { opacity: 0; } }
-    .role { animation: fadeSlideUp .7s ease .2s both; }
-    .intro { animation: fadeSlideUp .7s ease .3s both; }
-    .cta { animation: fadeSlideUp .7s ease .4s both; }
-    .role { font-size: 19px; color: var(--ink-soft); margin-bottom: 14px; font-weight: 500; }
-    .role .sep { color: var(--ink-muted); margin: 0 8px; }
-    .intro { max-width: 640px; color: var(--ink-soft); font-size: 18px; margin-bottom: 28px; }
+    .role { font-size: 19px; color: var(--ink); margin-bottom: 14px; font-weight: 500; }
+    .role .sep { color: var(--ink-muted); margin: 0 8px; font-weight: 400; }
+    .intro { max-width: 640px; color: var(--ink-soft); font-size: 18px; margin-bottom: 34px; }
+    .intro strong { color: var(--ink); font-weight: 600; }
     .cta { display: flex; gap: 12px; flex-wrap: wrap; }
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 11px 20px; border-radius: 10px;
+      padding: 12px 22px; border-radius: 999px;
       text-decoration: none; font-size: 15px; font-weight: 500;
-      transition: transform .2s, background .15s, border-color .15s, box-shadow .2s;
-      position: relative; overflow: hidden;
+      transition: transform .2s, background .15s, border-color .15s, box-shadow .2s, color .15s;
     }
     .btn-primary { background: var(--ink); color: var(--bg); }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px color-mix(in srgb, var(--ink) 25%, transparent);
-    }
-    .btn-primary:hover span.arrow { transform: translateX(3px); }
-    .btn-primary span.arrow { display: inline-block; transition: transform .25s cubic-bezier(.2,.8,.2,1); }
-    .btn-ghost { border: 1px solid var(--line); color: var(--ink); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px color-mix(in srgb, var(--ink) 25%, transparent); }
+    .btn .arrow { display: inline-block; transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+    .btn:hover .arrow { transform: translateX(3px); }
+    .btn-ghost { border: 1px solid var(--line-strong); color: var(--ink); background: color-mix(in srgb, var(--bg-elev) 60%, transparent); }
     .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      margin-top: 64px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    }
+    .hero-stat { padding: 20px 0 20px 20px; border-left: 1px solid var(--line); }
+    .hero-stat:first-child { border-left: none; padding-left: 0; }
+    .hero-stat .n { font-family: 'Instrument Serif', Georgia, serif; font-size: 38px; line-height: 1; letter-spacing: -.01em; }
+    .hero-stat .n em { color: var(--accent); font-style: normal; }
+    .hero-stat .l { font-size: 13px; color: var(--ink-muted); margin-top: 6px; }
+
     /* SECTION */
-    section.wrap {
-      padding: 88px 24px 78px;
-      border-top: 1px solid var(--line);
-      position: relative;
+    section { padding: 104px 0; position: relative; }
+    section.alt { background: var(--bg-sunk); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .section-head { margin-bottom: 40px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+      color: var(--accent); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px;
     }
-    section.wrap + section.wrap { padding-top: 88px; }
-    .section-head {
-      display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px;
-      position: relative;
-    }
-    .section-head::after {
-      content: ""; flex: 1; height: 1px; background: var(--line);
-      margin-left: 10px; transform: scaleX(0); transform-origin: left;
-      transition: transform 1.2s cubic-bezier(.2,.8,.2,1) .1s;
-    }
-    .reveal.in .section-head::after { transform: scaleX(1); }
-    .section-head .num {
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--accent); font-size: 14px; font-weight: 500;
-      opacity: 0; transform: translateY(6px);
-      transition: opacity .6s ease .1s, transform .6s ease .1s;
-    }
+    .eyebrow::before { content: ""; width: 22px; height: 1.5px; background: currentColor; }
     .section-head h2 {
-      font-size: 32px; font-weight: 700; letter-spacing: -.02em;
-      opacity: 0; transform: translateY(8px);
-      transition: opacity .6s ease .2s, transform .6s ease .2s;
+      font-size: clamp(34px, 4.5vw, 48px); font-weight: 600; letter-spacing: -.035em; line-height: 1.08;
     }
-    .reveal.in .section-head .num,
-    .reveal.in .section-head h2 { opacity: 1; transform: none; }
+    .section-head h2 .serif { font-style: italic; font-weight: 400; letter-spacing: -.01em; color: var(--ink-soft); }
 
     /* ABOUT */
-    .about p { color: var(--ink-soft); font-size: 17px; margin-bottom: 16px; max-width: 700px; }
+    .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: start; }
+    .about-grid p { color: var(--ink-soft); font-size: 17.5px; margin-bottom: 18px; }
+    .about-grid p strong { color: var(--ink); font-weight: 600; }
+    .facts { border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-elev); box-shadow: var(--shadow); }
+    .fact { display: flex; justify-content: space-between; gap: 16px; padding: 15px 20px; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+    .fact:last-child { border-bottom: none; }
+    .fact .k { color: var(--ink-muted); font-family: 'JetBrains Mono', monospace; font-size: 12.5px; padding-top: 2px; }
+    .fact .v { font-weight: 500; text-align: right; }
 
-    /* EXPERIENCE */
-    .job { padding: 20px 0; border-bottom: 1px dashed var(--line); }
-    .job:last-child { border-bottom: none; }
-    .job-head {
-      display: flex; justify-content: space-between; align-items: baseline;
-      flex-wrap: wrap; gap: 6px; margin-bottom: 6px;
+    /* THESIS */
+    .thesis {
+      border: 1px solid var(--line); border-radius: 24px; background: var(--bg-elev);
+      box-shadow: var(--shadow); overflow: hidden; position: relative;
     }
-    .job-title { font-weight: 600; font-size: 17px; }
-    .job-title .co { color: var(--accent); }
-    .job-date { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--ink-muted); }
-    .job-sub { color: var(--ink-soft); font-size: 15px; margin-bottom: 10px; }
-    .job ul { list-style: none; padding-left: 0; }
-    .job li {
-      color: var(--ink-soft); font-size: 15.5px; margin-bottom: 8px;
-      padding-left: 18px; position: relative;
-      transition: transform .25s cubic-bezier(.2,.8,.2,1);
+    .thesis::before {
+      content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
     }
-    .job li::before {
-      content: "→"; position: absolute; left: 0; color: var(--accent); font-weight: 600;
-      transition: transform .25s cubic-bezier(.2,.8,.2,1);
+    .thesis-top { padding: 40px 40px 8px; }
+    .thesis-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .pill {
+      font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+      padding: 4px 10px; border-radius: 999px; background: var(--chip); color: var(--ink-soft);
+      border: 1px solid var(--line);
     }
-    .job li:hover { transform: translateX(3px); }
-    .job li:hover::before { transform: translateX(2px); }
+    .pill.hot { background: var(--accent-soft); color: var(--accent); border-color: color-mix(in srgb, var(--accent) 30%, transparent); }
+    .thesis h3 {
+      font-family: 'Instrument Serif', Georgia, serif; font-weight: 400;
+      font-size: clamp(30px, 4vw, 44px); line-height: 1.1; letter-spacing: -.01em; margin-bottom: 14px;
+    }
+    .thesis-lede { color: var(--ink-soft); max-width: 760px; font-size: 16.5px; }
+    .thesis-body { display: grid; grid-template-columns: 1.15fr 1fr; gap: 0; margin-top: 32px; border-top: 1px solid var(--line); }
+    .thesis-col { padding: 32px 40px 40px; }
+    .thesis-col + .thesis-col { border-left: 1px solid var(--line); background: color-mix(in srgb, var(--bg-sunk) 55%, var(--bg-elev)); }
+    .col-title { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 16px; }
+    .rq { display: grid; grid-template-columns: 44px 1fr; gap: 4px 12px; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+    .rq:last-of-type { border-bottom: none; }
+    .rq .tag-rq { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 500; padding-top: 2px; }
+    .rq .q { font-weight: 600; font-size: 15px; line-height: 1.45; }
+    .rq .a { grid-column: 2; color: var(--ink-soft); font-size: 14.5px; line-height: 1.55; }
+    .bars { display: grid; gap: 14px; }
+    .bar-row { display: grid; grid-template-columns: 82px 1fr 52px; gap: 12px; align-items: center; font-size: 14px; }
+    .bar-row .name { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--ink-soft); }
+    .bar-track { height: 10px; border-radius: 999px; background: var(--chip); overflow: hidden; }
+    .bar-fill { height: 100%; width: 0; border-radius: 999px; background: var(--ink-muted); transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
+    .bar-row.win .bar-fill { background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+    .bar-row.win .name, .bar-row.win .pct { color: var(--ink); font-weight: 600; }
+    .bar-row .pct { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; text-align: right; color: var(--ink-soft); }
+    .bars-note { font-size: 12.5px; color: var(--ink-muted); margin-top: 14px; line-height: 1.5; }
+    .mini-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 26px; }
+    .mini-stat { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--bg-elev); }
+    .mini-stat .n { font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; line-height: 1; }
+    .mini-stat .l { font-size: 12px; color: var(--ink-muted); margin-top: 4px; line-height: 1.35; }
+    .thesis-foot { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
 
     /* PROJECTS */
-    .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    @media (max-width: 720px) { .projects { grid-template-columns: 1fr; } }
+    .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .card {
-      background: var(--bg-elev);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-      transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .25s, box-shadow .3s;
+      background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 26px; display: flex; flex-direction: column;
+      transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .25s, box-shadow .35s;
       position: relative; overflow: hidden;
-      opacity: 0; transform: translateY(16px);
     }
-    .reveal.in .card {
-      animation: cardIn .6s cubic-bezier(.2,.8,.2,1) both;
+    .card::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .35s;
+      background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--accent) 9%, transparent), transparent 45%);
     }
-    .reveal.in .card:nth-child(1) { animation-delay: .05s; }
-    .reveal.in .card:nth-child(2) { animation-delay: .15s; }
-    .reveal.in .card:nth-child(3) { animation-delay: .25s; }
-    .reveal.in .card:nth-child(4) { animation-delay: .35s; }
-    .reveal.in .card:nth-child(5) { animation-delay: .45s; }
-    .reveal.in .card:nth-child(6) { animation-delay: .55s; }
-    @keyframes cardIn {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: none; }
+    .card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); box-shadow: 0 18px 40px color-mix(in srgb, var(--accent) 10%, transparent); }
+    .card:hover::after { opacity: 1; }
+    .card.featured { grid-column: span 2; }
+    .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+    .card-icon {
+      width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center;
+      background: var(--accent-soft); color: var(--accent); flex-shrink: 0; margin-bottom: 16px;
     }
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
-      box-shadow: 0 12px 32px color-mix(in srgb, var(--accent) 10%, transparent);
-    }
-    .card::before {
-      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform .35s cubic-bezier(.2,.8,.2,1);
-    }
-    .card:hover::before { transform: scaleX(1); }
-    .card-head {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 10px;
-    }
-    .card h3 { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+    .card h3 { font-size: 19px; font-weight: 600; letter-spacing: -.015em; line-height: 1.3; }
     .tag {
-      font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
-      padding: 3px 8px; border-radius: 6px; background: var(--chip);
-      color: var(--ink-soft); white-space: nowrap;
-    }
-    .card p { color: var(--ink-soft); font-size: 15px; margin-bottom: 12px; }
-    .stack {
-      display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto;
-    }
-    .stack span {
       font-family: 'JetBrains Mono', monospace; font-size: 11px;
-      color: var(--ink-muted);
+      padding: 4px 9px; border-radius: 999px; background: var(--chip);
+      color: var(--ink-soft); white-space: nowrap; border: 1px solid var(--line);
     }
-    .stack span::after { content: "·"; margin-left: 6px; color: var(--ink-muted); }
-    .stack span:last-child::after { content: ""; }
+    .tag.wip { background: color-mix(in srgb, var(--accent-2) 12%, transparent); color: var(--accent-2); border-color: color-mix(in srgb, var(--accent-2) 30%, transparent); }
+    .card p { color: var(--ink-soft); font-size: 15px; margin-bottom: 18px; line-height: 1.6; }
+    .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+    .stack span {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-soft);
+      padding: 3px 8px; border-radius: 6px; background: var(--chip);
+    }
+    .card-links { display: flex; gap: 18px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); position: relative; z-index: 1; }
+    .card-links a {
+      font-size: 14px; font-weight: 500; text-decoration: none; color: var(--ink);
+      display: inline-flex; align-items: center; gap: 6px; transition: color .15s;
+    }
+    .card-links a:hover { color: var(--accent); }
+    .card-links a .arrow { transition: transform .25s cubic-bezier(.2,.8,.2,1); display: inline-block; }
+    .card-links a:hover .arrow { transform: translate(2px, -2px); }
+    .more-projects { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .more-projects .lbl { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-muted); margin-right: 4px; }
+    .more-projects a, .more-projects span.chip {
+      font-size: 13.5px; padding: 7px 13px; border-radius: 999px; border: 1px solid var(--line);
+      background: var(--bg-elev); text-decoration: none; color: var(--ink-soft); transition: border-color .2s, color .2s;
+    }
+    .more-projects a:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* EXPERIENCE (timeline) */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before { content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 1.5px; background: var(--line-strong); }
+    .job { position: relative; padding-bottom: 44px; }
+    .job:last-child { padding-bottom: 0; }
+    .job::before {
+      content: ""; position: absolute; left: -32px; top: 6px; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--bg); border: 2px solid var(--accent);
+      box-shadow: 0 0 0 4px var(--bg);
+    }
+    section.alt .job::before { background: var(--bg-sunk); box-shadow: 0 0 0 4px var(--bg-sunk); }
+    .job-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 4px; }
+    .job-title { font-weight: 600; font-size: 19px; letter-spacing: -.01em; }
+    .job-title .co { color: var(--accent); }
+    .job-date { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--ink-muted); }
+    .job-sub { color: var(--ink-muted); font-size: 14.5px; margin-bottom: 14px; }
+    .job ul { list-style: none; }
+    .job li { color: var(--ink-soft); font-size: 15.5px; margin-bottom: 9px; padding-left: 20px; position: relative; }
+    .job li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    .job li strong { color: var(--ink); }
 
     /* SKILLS */
-    .skills-grid { display: grid; gap: 14px; }
-    .skill-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: baseline; }
-    .skill-label {
-      font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
-      color: var(--accent); min-width: 150px; text-transform: uppercase;
-      letter-spacing: .05em;
-    }
-    .skill-items { color: var(--ink-soft); font-size: 15.5px; flex: 1; }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .skill-card { border: 1px solid var(--line); border-radius: 14px; padding: 20px; background: var(--bg-elev); transition: border-color .2s; }
+    .skill-card:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+    .skill-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 10px; }
+    .skill-items { color: var(--ink-soft); font-size: 14.5px; line-height: 1.6; }
 
-    /* EDUCATION */
-    .edu-item { padding: 16px 0; border-bottom: 1px dashed var(--line); }
-    .edu-item:last-child { border-bottom: none; }
-    .edu-head {
-      display: flex; justify-content: space-between; align-items: baseline;
-      flex-wrap: wrap; gap: 6px;
+    /* EDUCATION + CERTS */
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 56px; }
+    .edu-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; background: var(--bg-elev); position: relative; }
+    .edu-card.done { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); box-shadow: 0 12px 34px color-mix(in srgb, var(--accent) 8%, transparent); }
+    .edu-badge {
+      display: inline-flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+      color: var(--good); margin-bottom: 14px;
     }
-    .edu-school { font-weight: 600; font-size: 16px; }
-    .edu-degree { color: var(--ink-soft); font-size: 15px; margin-top: 3px; }
-    .edu-date { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--ink-muted); }
-
-    /* CERTS */
-    .certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .edu-date { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--ink-muted); margin-bottom: 14px; }
+    .edu-degree { font-size: 20px; font-weight: 600; letter-spacing: -.015em; line-height: 1.3; margin-bottom: 6px; }
+    .edu-school { color: var(--ink-soft); font-size: 15px; margin-bottom: 10px; }
+    .edu-note { color: var(--ink-muted); font-size: 14px; }
+    .sub-title { font-size: 20px; font-weight: 600; letter-spacing: -.015em; margin-bottom: 18px; }
+    .certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
     .cert {
-      display: flex; align-items: center; gap: 12px;
-      padding: 14px; border: 1px solid var(--line); border-radius: 10px;
-      background: var(--bg-elev);
-      transition: border-color .2s, transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .2s;
+      display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid var(--line); border-radius: 12px;
+      background: var(--bg-elev); transition: border-color .2s, transform .25s cubic-bezier(.2,.8,.2,1);
     }
-    .cert:hover {
-      border-color: var(--accent); transform: translateY(-2px);
-      box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 8%, transparent);
-    }
-    .cert:hover .cert-icon { transform: scale(1.08); }
-    .cert-icon { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+    .cert:hover { border-color: var(--accent); transform: translateY(-2px); }
     .cert-icon {
-      width: 34px; height: 34px; flex-shrink: 0; border-radius: 8px;
-      background: var(--accent-soft); color: var(--accent);
-      display: grid; place-items: center; font-weight: 700; font-size: 13px;
-      font-family: 'JetBrains Mono', monospace;
+      width: 36px; height: 36px; flex-shrink: 0; border-radius: 9px; background: var(--accent-soft); color: var(--accent);
+      display: grid; place-items: center; font-weight: 600; font-size: 11.5px; font-family: 'JetBrains Mono', monospace;
     }
-    .cert-name { font-size: 14.5px; font-weight: 500; line-height: 1.35; }
-    .cert-issuer { font-size: 12.5px; color: var(--ink-muted); margin-top: 3px; }
+    .cert-name { font-size: 14px; font-weight: 500; line-height: 1.35; }
+    .cert-issuer { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
 
     /* CONTACT */
-    .contact-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px; margin-top: 24px;
+    .contact-box {
+      border: 1px solid var(--line); border-radius: 28px; padding: 64px 48px; text-align: center;
+      background:
+        radial-gradient(600px circle at 15% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%),
+        radial-gradient(600px circle at 85% 100%, color-mix(in srgb, var(--accent-2) 12%, transparent), transparent 60%),
+        var(--bg-elev);
+      box-shadow: var(--shadow);
     }
-    .contact-card {
-      display: flex; gap: 14px; align-items: center;
-      padding: 18px; border: 1px solid var(--line); border-radius: 10px;
-      background: var(--bg-elev); text-decoration: none; color: inherit;
-      transition: border-color .2s, transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s;
+    .contact-box h2 { font-size: clamp(36px, 5.5vw, 60px); font-weight: 600; letter-spacing: -.04em; line-height: 1.05; margin-bottom: 16px; }
+    .contact-box h2 .serif { font-style: italic; font-weight: 400; color: var(--accent); }
+    .contact-box > p { color: var(--ink-soft); max-width: 540px; margin: 0 auto 32px; }
+    .contact-mail {
+      display: inline-flex; align-items: center; gap: 10px; font-size: clamp(17px, 2.4vw, 22px); font-weight: 500;
+      text-decoration: none; padding: 14px 26px; border-radius: 999px; background: var(--ink); color: var(--bg);
+      transition: transform .2s, box-shadow .2s; word-break: break-all;
     }
-    .contact-card:hover {
-      border-color: var(--accent); transform: translateY(-3px);
-      box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 10%, transparent);
+    .contact-mail:hover { transform: translateY(-2px); box-shadow: 0 12px 28px color-mix(in srgb, var(--ink) 25%, transparent); }
+    .socials { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .socials a, .socials span {
+      display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px;
+      border: 1px solid var(--line-strong); text-decoration: none; font-size: 14px; color: var(--ink-soft);
+      transition: border-color .2s, color .2s;
     }
-    .contact-card:hover .contact-icon {
-      background: var(--accent-soft); color: var(--accent); transform: rotate(-8deg);
-    }
-    .contact-icon {
-      width: 38px; height: 38px; border-radius: 10px;
-      background: var(--chip); display: grid; place-items: center; color: var(--ink-soft);
-      flex-shrink: 0; transition: background .2s, color .2s, transform .3s cubic-bezier(.2,.8,.2,1);
-    }
-    .contact-label { font-size: 12.5px; color: var(--ink-muted); font-family: 'JetBrains Mono', monospace; }
-    .contact-val { font-size: 15px; font-weight: 500; margin-top: 3px; word-break: break-all; }
+    .socials a:hover { border-color: var(--accent); color: var(--accent); }
 
     /* FOOTER */
-    footer {
-      padding: 40px 0 60px; border-top: 1px solid var(--line);
-      color: var(--ink-muted); font-size: 13px; text-align: center;
-    }
-    footer .mono { color: var(--ink-soft); }
+    footer { padding: 36px 0 56px; color: var(--ink-muted); font-size: 13px; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 
-    /* reveal */
-    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
-    .reveal.in { opacity: 1; transform: none; }
+    /* REVEAL (only when JS is running, so content is never hidden without it) */
+    .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1); }
+    .js .reveal.in { opacity: 1; transform: none; }
+    .js .stagger > * { opacity: 0; transform: translateY(14px); transition: opacity .6s cubic-bezier(.2,.8,.2,1), transform .6s cubic-bezier(.2,.8,.2,1); }
+    .js .stagger.in > * { opacity: 1; transform: none; }
+    .js .stagger.in > *:nth-child(2) { transition-delay: .07s; }
+    .js .stagger.in > *:nth-child(3) { transition-delay: .14s; }
+    .js .stagger.in > *:nth-child(4) { transition-delay: .21s; }
+    .js .stagger.in > *:nth-child(5) { transition-delay: .28s; }
+    .js .stagger.in > *:nth-child(6) { transition-delay: .35s; }
+    .js .stagger.in > *:nth-child(7) { transition-delay: .42s; }
+    .js .stagger.in > *:nth-child(8) { transition-delay: .49s; }
+    .js .stagger.in > *:nth-child(9) { transition-delay: .56s; }
+    .hero .rise { animation: rise .8s cubic-bezier(.2,.8,.2,1) both; }
+    .hero .rise:nth-child(2) { animation-delay: .08s; }
+    .hero .rise:nth-child(3) { animation-delay: .16s; }
+    .hero .rise:nth-child(4) { animation-delay: .24s; }
+    .hero .rise:nth-child(5) { animation-delay: .32s; }
+    .hero .rise:nth-child(6) { animation-delay: .42s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-      }
-      .hero-blob { display: none; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .orb { display: none; }
     }
 
-    @media (max-width: 600px) {
-      header.hero { padding: 88px 0 64px; }
-      section.wrap { padding: 64px 24px 52px; }
-      section.wrap + section.wrap { padding-top: 64px; }
-      .section-head { margin-bottom: 18px; }
-      .section-head h2 { font-size: 26px; }
-      .nav-links a:not(.theme-link) { display: none; }
+    @media (max-width: 860px) {
+      .about-grid, .thesis-body { grid-template-columns: 1fr; gap: 32px; }
+      .thesis-body { gap: 0; }
+      .thesis-col + .thesis-col { border-left: none; border-top: 1px solid var(--line); }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links > a { display: none; }
+    }
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      header.hero { padding: 72px 0 64px; }
+      section { padding: 72px 0; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .hero-stat:nth-child(3) { border-left: none; padding-left: 0; }
+      .hero-stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+      .projects, .edu-grid, .skills-grid { grid-template-columns: 1fr; }
+      .card.featured { grid-column: auto; }
+      .thesis-top { padding: 28px 22px 4px; }
+      .thesis-col { padding: 26px 22px 30px; }
+      .rq { grid-template-columns: 1fr; }
+      .rq .a { grid-column: 1; }
+      .bar-row { grid-template-columns: 72px 1fr 46px; gap: 10px; }
+      .contact-box { padding: 44px 22px; border-radius: 22px; }
+      .orb-2 { display: none; }
     }
   </style>
 </head>
@@ -393,356 +499,479 @@
 
 <div class="progress" id="progress"></div>
 
-<nav>
+<nav id="nav">
   <div class="nav-inner">
-    <div class="brand">ks<span class="dot">.</span></div>
+    <a class="brand" href="#top">ks<span class="dot">.</span></a>
     <div class="nav-links">
       <a href="#about" data-i18n="nav.about">About</a>
-      <a href="#experience" data-i18n="nav.experience">Experience</a>
+      <a href="#thesis" data-i18n="nav.thesis">Thesis</a>
       <a href="#projects" data-i18n="nav.projects">Projects</a>
-      <a href="#education" data-i18n="nav.education">Education</a>
+      <a href="#experience" data-i18n="nav.experience">Experience</a>
       <a href="#contact" data-i18n="nav.contact">Contact</a>
-      <button class="lang-btn" id="langBtn" aria-label="Toggle language">
-        <span id="langEn" class="lang-active">EN</span><span class="lang-sep">/</span><span id="langDe">DE</span>
-      </button>
-      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </button>
+      <div class="nav-tools">
+        <button class="lang-btn" id="langBtn" aria-label="Toggle language">
+          <span id="langEn" class="lang-active">EN</span><span class="lang-sep">/</span><span id="langDe">DE</span>
+        </button>
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+          <svg class="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </nav>
 
-<header class="hero wrap reveal">
-  <div class="hero-blob" aria-hidden="true"></div>
-  <div class="status"><span class="pulse"></span><span class="mono" data-i18n="hero.status">Open to AI / ML Engineer &amp; Data Scientist roles · Germany</span></div>
-  <h1>Kaustubh Salunke<span class="accent">.</span><span class="cursor" aria-hidden="true"></span></h1>
-  <p class="role" data-i18n="hero.role">AI / ML Engineer <span class="sep">/</span> Data Scientist <span class="sep">/</span> LLM &amp; Agentic Systems</p>
-  <p class="intro" data-i18n="hero.intro">I build production-grade GenAI and ML systems: Agentic RAG, multi-agent pipelines, LLM apps, and data pipelines with end-to-end ownership from architecture to cloud deployment. 2+ years at Accenture, currently completing an M.Sc. in Big Data &amp; AI at SRH Berlin.</p>
-  <div class="cta">
-    <a class="btn btn-primary" href="#contact"><span data-i18n="hero.cta_primary">Get in touch</span> <span class="arrow">→</span></a>
-    <a class="btn btn-ghost" href="#projects" data-i18n="hero.cta_secondary">View projects</a>
+<header class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="status rise"><span class="pulse"></span><span class="mono" data-i18n="hero.status">M.Sc. complete · Open to AI / ML Engineer &amp; Data Scientist roles · Germany</span></div>
+    <h1 class="rise">Kaustubh<br><span class="serif">Salunke.</span></h1>
+    <p class="role rise" data-i18n="hero.role">AI / ML Engineer <span class="sep">/</span> Data Scientist <span class="sep">/</span> LLM &amp; Agentic Systems</p>
+    <p class="intro rise" data-i18n="hero.intro">I build production-grade GenAI and ML systems: Agentic RAG, multi-agent pipelines and LLM apps, owned end to end from architecture to cloud deployment. 2+ years at Accenture, and a freshly completed <strong>M.Sc. in Big Data &amp; AI</strong> at SRH Berlin with a thesis on how LLM agents and their tools co-adapt.</p>
+    <div class="cta rise">
+      <a class="btn btn-primary" href="#contact"><span data-i18n="hero.cta_primary">Get in touch</span> <span class="arrow">→</span></a>
+      <a class="btn btn-ghost" href="#thesis"><span data-i18n="hero.cta_thesis">Read about my thesis</span></a>
+      <a class="btn btn-ghost" href="https://github.com/Kausta1011" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
+    </div>
+    <div class="hero-stats rise">
+      <div class="hero-stat"><div class="n">2<em>+</em></div><div class="l" data-i18n="stat.years">years at Accenture</div></div>
+      <div class="hero-stat"><div class="n">M.Sc<em>.</em></div><div class="l" data-i18n="stat.msc">Big Data &amp; AI, SRH Berlin</div></div>
+      <div class="hero-stat"><div class="n">94<em>%</em></div><div class="l" data-i18n="stat.thesis">thesis: loop correctness with pacemaker</div></div>
+      <div class="hero-stat"><div class="n">8</div><div class="l" data-i18n="stat.certs">cloud &amp; ML certifications</div></div>
+    </div>
   </div>
 </header>
 
-<section id="about" class="wrap reveal about">
-  <div class="section-head"><span class="num">01.</span><h2 data-i18n="sec.about">About</h2></div>
-  <p data-i18n="about.p1">I'm an AI / ML Engineer and Data Scientist based in Berlin, specializing in LLM application development, agentic systems, and production ML pipelines. At Accenture, I spent 2+ years engineering ML data pipelines and enterprise data systems, cutting processing time by 20% and earning the Accenture ACE Award for client outcomes.</p>
-  <p data-i18n="about.p2">These days I'm focused on the hard parts of putting LLMs and ML models in production: hybrid retrieval, self-correction loops, guardrails, observability, and evaluation harnesses. I care about systems that actually work under load, not demos.</p>
-</section>
-
-<section id="skills" class="wrap reveal">
-  <div class="section-head"><span class="num">02.</span><h2 data-i18n="sec.skills">Skills</h2></div>
-  <div class="skills-grid">
-    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_agentic">Agentic / LLM</div><div class="skill-items">LangGraph, LangChain, MCP, Agentic RAG, Hybrid Retrieval (Dense + BM25 + RRF), Cross-Encoder Reranking, Self-Correction Loops, Guardrails, RAGAS Evaluation</div></div>
-    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_models">Models</div><div class="skill-items">GPT-4o, Claude, Llama 3.1 (Groq), Hugging Face Transformers, Sentence-Transformers, PyTorch, TensorFlow, Scikit-learn</div></div>
-    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_retrieval">Retrieval</div><div class="skill-items">ChromaDB, FAISS, Pinecone, BM25 (rank-bm25), Tavily, tiktoken</div></div>
-    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_backend">Backend</div><div class="skill-items">Python, FastAPI, SSE Streaming, Pydantic, REST, Flask, SQL, Node.js</div></div>
-    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_mlops">MLOps</div><div class="skill-items">MLflow, Weights &amp; Biases, OpenTelemetry, Loguru, Evaluation Harnesses</div></div>
-    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_cloud">Cloud / DevOps</div><div class="skill-items">Docker, docker-compose, GitHub Actions, Kubernetes, Azure ML, Google Cloud AI, Render</div></div>
-    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_data">Data Eng</div><div class="skill-items">PySpark, Apache Airflow, Pandas, NumPy, n8n</div></div>
-    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_testing">Testing</div><div class="skill-items">pytest, pytest-asyncio, FakeLLM / FakeEmbeddings patterns, ruff, mypy</div></div>
-    <div class="skill-row"><div class="skill-label" data-i18n="skills.l_languages">Languages</div><div class="skill-items" data-i18n="skills.v_languages">English (C2) · German (B1)</div></div>
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="sec.about_eyebrow">About</div>
+      <h2 data-i18n="sec.about">Engineer first, <span class="serif">researcher by thesis.</span></h2>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p data-i18n="about.p1">I'm an AI / ML Engineer and Data Scientist based in Berlin, specializing in LLM application development, agentic systems, and production ML pipelines. At <strong>Accenture</strong>, I spent 2+ years engineering ML data pipelines and enterprise data systems, cutting processing time by 20% and earning the Accenture ACE Award for client outcomes.</p>
+        <p data-i18n="about.p2">I've just completed my <strong>M.Sc. in Big Data &amp; Artificial Intelligence</strong> at SRH Berlin. My thesis studied what happens when an LLM agent and its tool keep rewriting each other: when the loop drifts, when the tool starts confirming the agent's mistakes, and which simple regulators keep it stable.</p>
+        <p data-i18n="about.p3">I'm focused on the hard parts of putting LLMs in production: hybrid retrieval, self-correction loops, guardrails, observability, and evaluation harnesses. I care about systems that work under load, not just in demos.</p>
+      </div>
+      <div class="facts reveal">
+        <div class="fact"><span class="k" data-i18n="fact.based">based in</span><span class="v" data-i18n="fact.based_v">Berlin, Germany</span></div>
+        <div class="fact"><span class="k" data-i18n="fact.focus">focus</span><span class="v" data-i18n="fact.focus_v">LLM agents · RAG · MLOps</span></div>
+        <div class="fact"><span class="k" data-i18n="fact.degree">degree</span><span class="v">M.Sc. Big Data &amp; AI</span></div>
+        <div class="fact"><span class="k" data-i18n="fact.lang">languages</span><span class="v" data-i18n="skills.v_languages">English (C2) · German (B1)</span></div>
+        <div class="fact"><span class="k" data-i18n="fact.open">open to</span><span class="v" data-i18n="fact.open_v">Berlin or remote</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section id="experience" class="wrap reveal">
-  <div class="section-head"><span class="num">03.</span><h2 data-i18n="sec.experience">Experience</h2></div>
-
-  <div class="job">
-    <div class="job-head">
-      <div class="job-title"><span class="co">Accenture</span> · <span data-i18n="exp.acc_role">Associate Software Developer</span></div>
-      <div class="job-date">Feb 2023 – Sep 2024</div>
-    </div>
-    <div class="job-sub" data-i18n="exp.acc_sub">Machine Learning / Data Science · Enterprise Data & ML Pipeline Engineering · Pune, India</div>
-    <ul>
-      <li data-i18n="exp.acc_li1">Optimized Python-based ML data pipelines with vectorized operations, reducing end-to-end processing time by <strong>20%</strong>.</li>
-      <li data-i18n="exp.acc_li2">Engineered feature-ready datasets from structured enterprise data (imputation, encoding, normalization) powering predictive modeling and automated decisioning.</li>
-      <li data-i18n="exp.acc_li3">Refactored Python and SQL pipelines to modularize transformation logic and optimize query execution, improving system reliability at scale.</li>
-      <li data-i18n="exp.acc_li4">Recognized with the <strong>Accenture ACE (Extra Mile) Award</strong> for delivering exceptional client outcomes.</li>
-    </ul>
-  </div>
-
-  <div class="job">
-    <div class="job-head">
-      <div class="job-title"><span class="co">Ethnus</span> · <span data-i18n="exp.eth_role">Software Developer Intern</span></div>
-      <div class="job-date">Jul 2022 – Sep 2022</div>
-    </div>
-    <div class="job-sub" data-i18n="exp.eth_sub">Bangalore, India</div>
-    <ul>
-      <li data-i18n="exp.eth_li1">Reduced manual reporting effort by building SQL workflows for internal business applications.</li>
-      <li data-i18n="exp.eth_li2">Resolved UI/UX friction in an instructor-facing internal tool, improving task completion flow.</li>
-      <li data-i18n="exp.eth_li3">Contributed to Agile sprint cycles (standups, planning, retrospectives) shipping features on schedule.</li>
-    </ul>
-  </div>
-</section>
-
-<section id="projects" class="wrap reveal">
-  <div class="section-head"><span class="num">04.</span><h2 data-i18n="sec.projects">Projects</h2></div>
-  <div class="projects">
-
-    <div class="card">
-      <div class="card-head">
-        <h3 data-i18n="proj.rag_title">Agentic RAG Platform</h3>
-        <span class="tag">GenAI</span>
-      </div>
-      <p data-i18n="proj.rag_desc">Production-grade Agentic RAG as a LangGraph state machine with self-correction loops: router, query rewriter, retrieve, rerank, grade, web-search fallback, generate, reflect. Hybrid retrieval (ChromaDB + BM25 + RRF) with cross-encoder reranking. InputGuard for PII / prompt injection, OutputGuard for faithfulness, RAGAS harness, OpenTelemetry on every node. Shipped with FastAPI + SSE, stdio MCP server, Streamlit UI, Docker.</p>
-      <div class="stack">
-        <span>LangGraph</span><span>FastAPI</span><span>MCP</span><span>ChromaDB</span><span>BM25</span><span>OpenTelemetry</span><span>Docker</span>
-      </div>
+<section id="thesis" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="sec.thesis_eyebrow">Master's thesis · 2026</div>
+      <h2 data-i18n="sec.thesis">PaceTest <span class="serif">· agent–tool co-adaptation</span></h2>
     </div>
 
-    <div class="card">
-      <div class="card-head">
-        <h3 data-i18n="proj.inv_title">AI Investment Research Assistant</h3>
-        <span class="tag">Multi-Agent</span>
+    <article class="thesis reveal">
+      <div class="thesis-top">
+        <div class="thesis-meta">
+          <span class="pill hot">M.Sc. Thesis</span>
+          <span class="pill">SRH Berlin</span>
+          <span class="pill" data-i18n="thesis.supervisor">Supervisor: Prof. Dr. Alexander Iliev</span>
+        </div>
+        <h3 data-i18n="thesis.title">When do AI agents and their tools deceive each other?</h3>
+        <p class="thesis-lede" data-i18n="thesis.lede">A closed loop in which an LLM agent's system prompt and its calculator tool's documentation are both rewritten, round after round, from oracle feedback. I measured whether the loop cycles or drifts instead of converging, whether the tool ends up confirming the agent's errors ("tool sycophancy"), and whether simple regulators, which I call pacemakers, can keep the loop stable.</p>
       </div>
-      <p data-i18n="proj.inv_desc">Parallel multi-agent system where News Scout, Analyst, and Sentiment Judge fan out concurrently across Google News, yfinance, SEC EDGAR (10-K/10-Q/8-K), and Reddit, then synchronize to produce BUY / HOLD / SELL verdicts with bull case, bear case, and risks. Partial-failure tolerance, SHA-256 disk cache with TTL, pluggable LLM factory, and a self-contained HTML brief with Plotly charts and filterable source tables.</p>
-      <div class="stack">
-        <span>LangGraph</span><span>LangChain</span><span>yfinance</span><span>SEC EDGAR</span><span>Plotly</span><span>Jinja2</span>
-      </div>
-    </div>
 
-    <div class="card">
-      <div class="card-head">
-        <h3 data-i18n="proj.pizza_title">AI Pizza Ordering Assistant</h3>
-        <span class="tag">Conv. Agent</span>
-      </div>
-      <p data-i18n="proj.pizza_desc">Conversational agent for a pizza delivery service. Designed a dialog flowchart and implemented a structured prompt-driven system to manage real-time customer interactions (menu validation, special requests like allergies and vegan, delivery address collection) outputting clean JSON orders. Also built a voice-enabled variant.</p>
-      <div class="stack">
-        <span>Python</span><span>LLM</span><span>Prompt Engineering</span><span>Voice I/O</span>
-      </div>
-    </div>
+      <div class="thesis-body">
+        <div class="thesis-col">
+          <div class="col-title" data-i18n="thesis.findings">Research questions &amp; findings</div>
+          <div class="rq">
+            <span class="tag-rq">RQ1</span>
+            <span class="q" data-i18n="thesis.rq1q">Does co-adaptation cycle?</span>
+            <span class="a" data-i18n="thesis.rq1a">Cycling is concentrated, not widespread: it is tied to specific knob settings (e.g. no oracle feedback with medium self-judgement degrades on every seed).</span>
+          </div>
+          <div class="rq">
+            <span class="tag-rq">RQ2</span>
+            <span class="q" data-i18n="thesis.rq2q">Does tool sycophancy emerge?</span>
+            <span class="a" data-i18n="thesis.rq2a">Conditionally, yes. One agent sends only the first step to the calculator and echoes its output verbatim; the mirror failure, tool abandonment, also appears. All 205 compliant-but-wrong events were hand-verified.</span>
+          </div>
+          <div class="rq">
+            <span class="tag-rq">RQ3</span>
+            <span class="q" data-i18n="thesis.rq3q">Which pacemaker works best?</span>
+            <span class="a" data-i18n="thesis.rq3a">Freeze is the recommended default, with gating as a supplement. Diversity reseeding is harmful as a default. The corruption channel is agent-side rewriter drift, not tool-doc drift.</span>
+          </div>
+        </div>
 
-    <div class="card">
-      <div class="card-head">
-        <h3 data-i18n="proj.neural_title">Neural Time-Series Forecasting for Stocks</h3>
-        <span class="tag">Deep Learning</span>
+        <div class="thesis-col">
+          <div class="col-title" data-i18n="thesis.chart">Correct answers by pacemaker · Qwen3-8B</div>
+          <div class="bars" id="bars">
+            <div class="bar-row"><span class="name">baseline</span><div class="bar-track"><div class="bar-fill" data-w="70.4"></div></div><span class="pct">70.4%</span></div>
+            <div class="bar-row win"><span class="name">freeze</span><div class="bar-track"><div class="bar-fill" data-w="94.4"></div></div><span class="pct">94.4%</span></div>
+            <div class="bar-row"><span class="name">diversity</span><div class="bar-track"><div class="bar-fill" data-w="64.6"></div></div><span class="pct">64.6%</span></div>
+            <div class="bar-row win"><span class="name">gating</span><div class="bar-track"><div class="bar-fill" data-w="93.5"></div></div><span class="pct">93.5%</span></div>
+          </div>
+          <p class="bars-note" data-i18n="thesis.chart_note">Of 540 final answers per condition (3 seeds × 9 knob cells × 20 tasks). Freeze: 0 of 27 cells degraded. Gating: 1 of 27, at ~1.7× wall-clock.</p>
+          <div class="mini-stats">
+            <div class="mini-stat"><div class="n">180</div><div class="l" data-i18n="thesis.s1">trajectories</div></div>
+            <div class="mini-stat"><div class="n">3,680</div><div class="l" data-i18n="thesis.s2">scored rounds</div></div>
+            <div class="mini-stat"><div class="n">107</div><div class="l" data-i18n="thesis.s3">pytest tests</div></div>
+            <div class="mini-stat"><div class="n">$2.52</div><div class="l" data-i18n="thesis.s4">cross-model check (Claude Haiku, GPT-4o-mini)</div></div>
+          </div>
+          <div class="thesis-foot">
+            <a class="btn btn-primary" href="https://github.com/Kausta1011/PaceTest" target="_blank" rel="noopener"><span data-i18n="thesis.code">View the code</span> <span class="arrow">↗</span></a>
+          </div>
+        </div>
       </div>
-      <p data-i18n="proj.neural_desc">ML pipeline for stock market forecasting on historical price and volume data. Feature engineering with technical indicators (MA, RSI, MACD), baseline models (Logistic Regression, Random Forest), then sequence models (LSTM / GRU). Proper time-series validation, classification metrics plus trading KPIs (Sharpe ratio, cumulative returns), and simple backtesting simulation.</p>
-      <div class="stack">
-        <span>PyTorch</span><span>LSTM</span><span>Pandas</span><span>Scikit-learn</span><span>Backtesting</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-head">
-        <h3 data-i18n="proj.churn_title">Customer Churn Prediction, End-to-End ML</h3>
-        <span class="tag">Classical ML</span>
-      </div>
-      <p data-i18n="proj.churn_desc">End-to-end churn prediction pipeline covering EDA, feature engineering, class imbalance handling (SMOTE), and comparison across Logistic Regression, XGBoost, and LightGBM. SHAP for explainability, MLflow for experiment tracking, FastAPI for serving, and a lightweight Streamlit dashboard for business stakeholders.</p>
-      <div class="stack">
-        <span>XGBoost</span><span>SHAP</span><span>MLflow</span><span>FastAPI</span><span>Streamlit</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-head">
-        <h3 data-i18n="proj.retail_title">Retail Demand Forecasting</h3>
-        <span class="tag">Forecasting</span>
-      </div>
-      <p data-i18n="proj.retail_desc">Hierarchical demand forecasting across SKU × store × week. Baselines (naive, ETS, Prophet) vs. gradient-boosted trees (LightGBM) with lag and rolling features, then a Temporal Fusion Transformer for the top tier. Cross-validation with expanding window, MAPE / WAPE metrics, and a reconciliation step across the hierarchy.</p>
-      <div class="stack">
-        <span>Prophet</span><span>LightGBM</span><span>PyTorch</span><span>Pandas</span>
-      </div>
-    </div>
-
+    </article>
   </div>
 </section>
 
-<section id="education" class="wrap reveal">
-  <div class="section-head"><span class="num">05.</span><h2 data-i18n="sec.education">Education</h2></div>
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="sec.projects_eyebrow">Selected work</div>
+      <h2 data-i18n="sec.projects">Projects <span class="serif">I've shipped.</span></h2>
+    </div>
+    <div class="projects stagger">
 
-  <div class="edu-item">
-    <div class="edu-head">
-      <div>
+      <div class="card featured">
+        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="M8.5 7.5 11 16M15.5 7.5 13 16M9 6h6"/></svg></div>
+        <div class="card-head">
+          <h3 data-i18n="proj.rag_title">Agentic RAG Platform</h3>
+          <span class="tag">GenAI</span>
+        </div>
+        <p data-i18n="proj.rag_desc">Production-grade Agentic RAG as a LangGraph state machine with self-correction loops: router, query rewriter, retrieve, rerank, grade, web-search fallback, generate, reflect. Hybrid retrieval (ChromaDB + BM25 + RRF) with cross-encoder reranking. InputGuard for PII / prompt injection, OutputGuard for faithfulness, RAGAS-style evaluation, OpenTelemetry on every node. Shipped with FastAPI + SSE, a stdio MCP server, Streamlit UI and Docker.</p>
+        <div class="stack"><span>LangGraph</span><span>FastAPI</span><span>MCP</span><span>ChromaDB</span><span>BM25</span><span>OpenTelemetry</span><span>Docker</span></div>
+        <div class="card-links"><a href="https://github.com/Kausta1011/agentic-rag-platform" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a></div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></div>
+        <div class="card-head">
+          <h3 data-i18n="proj.inv_title">AI Investment Research Assistant</h3>
+          <span class="tag">Multi-Agent</span>
+        </div>
+        <p data-i18n="proj.inv_desc">News Scout, Analyst and Sentiment Judge agents fan out in parallel across Google News, yfinance, SEC EDGAR and Reddit, then a Report Writer produces a BUY / HOLD / SELL brief with bull case, bear case and risks. Partial-failure tolerance, disk cache with TTL, a pluggable LLM factory, and an interactive HTML dashboard. Engineered to run on free-tier LLM keys.</p>
+        <div class="stack"><span>LangGraph</span><span>LangChain</span><span>yfinance</span><span>SEC EDGAR</span><span>Plotly</span></div>
+        <div class="card-links"><a href="https://github.com/Kausta1011/Investment-Research-Assistant" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a></div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div>
+        <div class="card-head">
+          <h3 data-i18n="proj.research_title">AI Research Agent</h3>
+          <span class="tag">ReAct Agent</span>
+        </div>
+        <p data-i18n="proj.research_desc">An autonomous agent that turns a research question into a sourced report. A LangGraph ReAct loop has Llama 3.3 70B (Groq) write search queries, Tavily search the web, and the model judge whether it has enough, searching again with refined queries until it does. FastAPI backend on Render, Streamlit frontend.</p>
+        <div class="stack"><span>LangGraph</span><span>Groq</span><span>Tavily</span><span>FastAPI</span><span>Streamlit</span></div>
+        <div class="card-links">
+          <a href="https://ai-research-agent-yo5sdpneigrh7qmzqzmwta.streamlit.app" target="_blank" rel="noopener"><span data-i18n="proj.live">Live demo</span> <span class="arrow">↗</span></a>
+          <a href="https://github.com/Kausta1011/AI-Research-Agent" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div>
+        <div class="card-head">
+          <h3 data-i18n="proj.docqa_title">RAG Document Q&amp;A</h3>
+          <span class="tag">RAG</span>
+        </div>
+        <p data-i18n="proj.docqa_desc">Full-stack app: upload a PDF and ask questions about it. PyMuPDF parsing, sliding-window chunking, ChromaDB upsert storage and Groq Llama 3.1 with a strict context-only prompt that answers "I don't know" rather than hallucinate. Deployed on Render and Streamlit Cloud.</p>
+        <div class="stack"><span>FastAPI</span><span>ChromaDB</span><span>PyMuPDF</span><span>Groq</span><span>Streamlit</span></div>
+        <div class="card-links">
+          <a href="https://rag-bot-documents-gi8h6occy68y3thvj7v3wi.streamlit.app" target="_blank" rel="noopener"><span data-i18n="proj.live">Live demo</span> <span class="arrow">↗</span></a>
+          <a href="https://github.com/Kausta1011/rag-bot-documents" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v18M5 7h6M5 13h6M11 7v12h8M11 13h8"/></svg></div>
+        <div class="card-head">
+          <h3 data-i18n="proj.chunkless_title">Chunk-Less RAG</h3>
+          <span class="tag wip" data-i18n="proj.wip">In progress</span>
+        </div>
+        <p data-i18n="proj.chunkless_desc">Retrieval without fixed-size chunks: parsing long filings (Apple's 2025 10-K) into a heading tree with Docling and navigating that structure instead of embedding slices. Built layer by layer with documented measurements and a 21-question eval set that uses heading paths as ground truth.</p>
+        <div class="stack"><span>Docling</span><span>pypdf</span><span>Python</span><span>Evaluation</span></div>
+        <div class="card-links"><a href="https://github.com/Kausta1011/Chunk-Less-RAG" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a></div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="card-head">
+          <h3 data-i18n="proj.pizza_title">AI Pizza Ordering Assistant</h3>
+          <span class="tag">Conv. Agent</span>
+        </div>
+        <p data-i18n="proj.pizza_desc">Conversational agent for a pizza delivery service. A dialog flowchart and structured prompt-driven system handle menu validation, special requests (allergies, vegan) and delivery details, and output clean JSON orders. Includes a voice-enabled variant.</p>
+        <div class="stack"><span>Python</span><span>LLM</span><span>Prompt Engineering</span><span>Voice I/O</span></div>
+        <div class="card-links"><a href="https://github.com/Kausta1011/AI_Pizza_Delivery" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a></div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m17 8 5 5M22 8l-5 5"/></svg></div>
+        <div class="card-head">
+          <h3 data-i18n="proj.churn_title">Customer Churn Prediction</h3>
+          <span class="tag">Classical ML</span>
+        </div>
+        <p data-i18n="proj.churn_desc">End-to-end churn pipeline: EDA, feature engineering, class imbalance handling (SMOTE), and a comparison of Logistic Regression, XGBoost and LightGBM, with SHAP for explainability and MLflow for experiment tracking.</p>
+        <div class="stack"><span>XGBoost</span><span>LightGBM</span><span>SHAP</span><span>MLflow</span></div>
+        <div class="card-links"><a href="https://github.com/Kausta1011/Customer_Churn_Prediction" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a></div>
+      </div>
+
+    </div>
+
+    <div class="more-projects reveal">
+      <span class="lbl" data-i18n="proj.more">also on github →</span>
+      <a href="https://github.com/Kausta1011/FastAPI-Task_Manager" target="_blank" rel="noopener">FastAPI Task Manager</a>
+      <a href="https://github.com/Kausta1011/UCI-Heart-DIsease-Classification" target="_blank" rel="noopener">Heart Disease Classification</a>
+      <a href="https://github.com/Kausta1011/MNIST_with_a_Twist" target="_blank" rel="noopener">MNIST with a Twist</a>
+      <a href="https://github.com/Kausta1011/Spam_Ham" target="_blank" rel="noopener">Spam / Ham</a>
+      <a href="https://github.com/Kausta1011/California-Housing-Price-Prediction" target="_blank" rel="noopener">California Housing</a>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="sec.experience_eyebrow">Experience</div>
+      <h2 data-i18n="sec.experience">Where I've <span class="serif">worked.</span></h2>
+    </div>
+    <div class="timeline">
+      <div class="job reveal">
+        <div class="job-head">
+          <div class="job-title"><span class="co">Accenture</span> · <span data-i18n="exp.acc_role">Associate Software Developer</span></div>
+          <div class="job-date">Feb 2023 – Sep 2024</div>
+        </div>
+        <div class="job-sub" data-i18n="exp.acc_sub">Machine Learning / Data Science · Enterprise Data &amp; ML Pipeline Engineering · Pune, India</div>
+        <ul>
+          <li data-i18n="exp.acc_li1">Optimized Python-based ML data pipelines with vectorized operations, reducing end-to-end processing time by <strong>20%</strong>.</li>
+          <li data-i18n="exp.acc_li2">Engineered feature-ready datasets from structured enterprise data (imputation, encoding, normalization) powering predictive modeling and automated decisioning.</li>
+          <li data-i18n="exp.acc_li3">Refactored Python and SQL pipelines to modularize transformation logic and optimize query execution, improving system reliability at scale.</li>
+          <li data-i18n="exp.acc_li4">Recognized with the <strong>Accenture ACE (Extra Mile) Award</strong> for delivering exceptional client outcomes.</li>
+        </ul>
+      </div>
+      <div class="job reveal">
+        <div class="job-head">
+          <div class="job-title"><span class="co">Ethnus</span> · <span data-i18n="exp.eth_role">Software Developer Intern</span></div>
+          <div class="job-date">Jul 2022 – Sep 2022</div>
+        </div>
+        <div class="job-sub" data-i18n="exp.eth_sub">Bangalore, India</div>
+        <ul>
+          <li data-i18n="exp.eth_li1">Reduced manual reporting effort by building SQL workflows for internal business applications.</li>
+          <li data-i18n="exp.eth_li2">Resolved UI/UX friction in an instructor-facing internal tool, improving task completion flow.</li>
+          <li data-i18n="exp.eth_li3">Contributed to Agile sprint cycles (standups, planning, retrospectives) shipping features on schedule.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="sec.skills_eyebrow">Toolkit</div>
+      <h2 data-i18n="sec.skills">Skills <span class="serif">&amp; stack.</span></h2>
+    </div>
+    <div class="skills-grid stagger">
+      <div class="skill-card"><div class="skill-label" data-i18n="skills.l_agentic">Agentic / LLM</div><div class="skill-items">LangGraph, LangChain, MCP, Agentic RAG, Hybrid Retrieval (Dense + BM25 + RRF), Cross-Encoder Reranking, Self-Correction Loops, Guardrails, RAGAS Evaluation</div></div>
+      <div class="skill-card"><div class="skill-label" data-i18n="skills.l_models">Models</div><div class="skill-items">GPT-4o, Claude, Llama 3.x (Groq), Qwen3 (Ollama), Hugging Face Transformers, Sentence-Transformers, PyTorch, TensorFlow, Scikit-learn</div></div>
+      <div class="skill-card"><div class="skill-label" data-i18n="skills.l_retrieval">Retrieval</div><div class="skill-items">ChromaDB, FAISS, Pinecone, BM25 (rank-bm25), Tavily, Docling, PyMuPDF, tiktoken</div></div>
+      <div class="skill-card"><div class="skill-label" data-i18n="skills.l_backend">Backend</div><div class="skill-items">Python, FastAPI, SSE Streaming, Pydantic, REST, Flask, SQL, PostgreSQL, SQLAlchemy, Node.js</div></div>
+      <div class="skill-card"><div class="skill-label" data-i18n="skills.l_mlops">MLOps</div><div class="skill-items">MLflow, Weights &amp; Biases, OpenTelemetry, Loguru, Evaluation Harnesses</div></div>
+      <div class="skill-card"><div class="skill-label" data-i18n="skills.l_cloud">Cloud / DevOps</div><div class="skill-items">Docker, docker-compose, GitHub Actions, Kubernetes, Azure ML, Google Cloud AI, Render</div></div>
+      <div class="skill-card"><div class="skill-label" data-i18n="skills.l_data">Data Eng</div><div class="skill-items">PySpark, Apache Airflow, Pandas, NumPy, n8n</div></div>
+      <div class="skill-card"><div class="skill-label" data-i18n="skills.l_testing">Testing</div><div class="skill-items">pytest, pytest-asyncio, FakeLLM / FakeEmbeddings patterns, ruff, mypy</div></div>
+      <div class="skill-card"><div class="skill-label" data-i18n="skills.l_research">Research</div><div class="skill-items" data-i18n="skills.v_research">Experiment design, parameter sweeps, embedding-based drift metrics, reproducible seeded runs, manual error verification</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="education" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="sec.education_eyebrow">Education</div>
+      <h2 data-i18n="sec.education">Degrees <span class="serif">&amp; certifications.</span></h2>
+    </div>
+    <div class="edu-grid stagger">
+      <div class="edu-card done">
+        <div class="edu-badge">● <span data-i18n="edu.completed">Completed</span></div>
+        <div class="edu-date" data-i18n="edu.srh_date">Oct 2024 – 2026</div>
+        <div class="edu-degree" data-i18n="edu.srh_degree">M.Sc. Big Data &amp; Artificial Intelligence</div>
         <div class="edu-school">SRH Berlin University of Applied Sciences</div>
-        <div class="edu-degree" data-i18n="edu.srh_degree">M.Sc. Big Data &amp; Artificial Intelligence · GPA 1.7 (German scale, equivalent to Distinction)</div>
+        <div class="edu-note" data-i18n="edu.srh_note">GPA 1.7 (German scale, equivalent to Distinction) · Thesis: agent–tool co-adaptation &amp; tool sycophancy</div>
       </div>
-      <div class="edu-date" data-i18n="edu.srh_date">Oct 2024 – Present</div>
-    </div>
-  </div>
-
-  <div class="edu-item">
-    <div class="edu-head">
-      <div>
+      <div class="edu-card">
+        <div class="edu-date">Aug 2017 – Jul 2022</div>
+        <div class="edu-degree" data-i18n="edu.pune_degree">B.Sc. Mechanical Engineering</div>
         <div class="edu-school">Pune University</div>
-        <div class="edu-degree" data-i18n="edu.pune_degree">B.Sc. Mechanical Engineering · GPA 2.2 (German scale, equivalent to Distinction)</div>
+        <div class="edu-note" data-i18n="edu.pune_note">GPA 2.2 (German scale)</div>
       </div>
-      <div class="edu-date">Aug 2017 – Jul 2022</div>
+    </div>
+
+    <h3 class="sub-title reveal" data-i18n="sec.certifications">Certifications</h3>
+    <div class="certs stagger">
+      <div class="cert"><div class="cert-icon">AZ</div><div><div class="cert-name">Azure Administrator Associate (AZ-104)</div><div class="cert-issuer">Microsoft</div></div></div>
+      <div class="cert"><div class="cert-icon">AI</div><div><div class="cert-name">Azure AI Fundamentals (AI-900)</div><div class="cert-issuer">Microsoft</div></div></div>
+      <div class="cert"><div class="cert-icon">AZ</div><div><div class="cert-name">Azure Fundamentals (AZ-900)</div><div class="cert-issuer">Microsoft</div></div></div>
+      <div class="cert"><div class="cert-icon">GCP</div><div><div class="cert-name">Cloud Digital Leader</div><div class="cert-issuer">Google Cloud</div></div></div>
+      <div class="cert"><div class="cert-icon">ML</div><div><div class="cert-name">Machine Learning Specialization</div><div class="cert-issuer">Stanford / DeepLearning.AI · Coursera</div></div></div>
+      <div class="cert"><div class="cert-icon">MA</div><div><div class="cert-name">Mathematics for Machine Learning &amp; Data Science</div><div class="cert-issuer">DeepLearning.AI · Coursera</div></div></div>
+      <div class="cert"><div class="cert-icon">AP</div><div><div class="cert-name">Certified Associate Developer</div><div class="cert-issuer">Appian</div></div></div>
+      <div class="cert"><div class="cert-icon">GO</div><div><div class="cert-name">Foundations: Data, Data, Everywhere</div><div class="cert-issuer">Google · Coursera</div></div></div>
     </div>
   </div>
 </section>
 
-<section id="certificates" class="wrap reveal">
-  <div class="section-head"><span class="num">06.</span><h2 data-i18n="sec.certifications">Certifications</h2></div>
-  <div class="certs">
-
-    <div class="cert">
-      <div class="cert-icon">AZ</div>
-      <div>
-        <div class="cert-name">Azure Administrator Associate (AZ-104)</div>
-        <div class="cert-issuer">Microsoft</div>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-icon">AI</div>
-      <div>
-        <div class="cert-name">Azure AI Fundamentals (AI-900)</div>
-        <div class="cert-issuer">Microsoft</div>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-icon">AZ</div>
-      <div>
-        <div class="cert-name">Azure Fundamentals (AZ-900)</div>
-        <div class="cert-issuer">Microsoft</div>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-icon">GCP</div>
-      <div>
-        <div class="cert-name">Cloud Digital Leader</div>
-        <div class="cert-issuer">Google Cloud</div>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-icon">ML</div>
-      <div>
-        <div class="cert-name">Machine Learning Specialization</div>
-        <div class="cert-issuer">Stanford / DeepLearning.AI · Coursera</div>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-icon">MA</div>
-      <div>
-        <div class="cert-name">Mathematics for Machine Learning & Data Science</div>
-        <div class="cert-issuer">DeepLearning.AI · Coursera</div>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-icon">AP</div>
-      <div>
-        <div class="cert-name">Certified Associate Developer</div>
-        <div class="cert-issuer">Appian</div>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-icon">GO</div>
-      <div>
-        <div class="cert-name">Foundations: Data, Data, Everywhere</div>
-        <div class="cert-issuer">Google · Coursera</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section id="contact" class="wrap reveal">
-  <div class="section-head"><span class="num">07.</span><h2 data-i18n="sec.contact">Contact</h2></div>
-  <p style="color: var(--ink-soft); max-width: 580px;" data-i18n="contact.intro">The fastest way to reach me is email. Open to AI Engineer, ML Engineer, and Data Scientist roles in Berlin or remote.</p>
-  <div class="contact-grid">
-    <a class="contact-card" href="mailto:kaustubh.v.salunke@gmail.com">
-      <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-      <div>
-        <div class="contact-label" data-i18n="contact.email">email</div>
-        <div class="contact-val">kaustubh.v.salunke@gmail.com</div>
-      </div>
-    </a>
-
-    <a class="contact-card" href="tel:+4915222128451">
-      <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-      <div>
-        <div class="contact-label" data-i18n="contact.phone">phone</div>
-        <div class="contact-val">+49 152 2212 8451</div>
-      </div>
-    </a>
-
-    <a class="contact-card" href="https://www.linkedin.com/in/kaustubh-salunke-a4264619a/" target="_blank" rel="noopener">
-      <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-      <div>
-        <div class="contact-label" data-i18n="contact.linkedin">linkedin</div>
-        <div class="contact-val">in/kaustubhsalunke</div>
-      </div>
-    </a>
-
-    <a class="contact-card" href="https://github.com/kausta1011" target="_blank" rel="noopener">
-      <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
-      <div>
-        <div class="contact-label" data-i18n="contact.github">github</div>
-        <div class="contact-val">github.com/kausta1011</div>
-      </div>
-    </a>
-
-    <div class="contact-card" style="cursor: default;">
-      <div class="contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-      <div>
-        <div class="contact-label" data-i18n="contact.location">location</div>
-        <div class="contact-val" data-i18n="contact.location_val">Berlin, Germany</div>
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <div class="eyebrow" data-i18n="sec.contact_eyebrow">Contact</div>
+      <h2 data-i18n="sec.contact">Let's build <span class="serif">something.</span></h2>
+      <p data-i18n="contact.intro">The fastest way to reach me is email. Open to AI Engineer, ML Engineer, and Data Scientist roles in Berlin or remote.</p>
+      <a class="contact-mail" href="mailto:kaustubh.v.salunke@gmail.com">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        kaustubh.v.salunke@gmail.com
+      </a>
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/kaustubh-salunke-a4264619a/" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/Kausta1011" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-i18n="contact.location_val">Berlin, Germany</span>
+        </span>
       </div>
     </div>
   </div>
 </section>
 
-<footer class="wrap">
-  <div class="mono" data-i18n="footer.built">&lt;/&gt; Built with HTML, CSS & care</div>
-  <div style="margin-top: 6px;">© 2026 Kaustubh Salunke</div>
+<footer>
+  <div class="wrap">
+    <div class="mono" data-i18n="footer.built">&lt;/&gt; Built with HTML, CSS &amp; care</div>
+    <div>© 2026 Kaustubh Salunke</div>
+  </div>
 </footer>
 
 <script>
-  // Theme toggle
+  // Theme toggle (explicit choice is remembered; otherwise follows the OS)
   const themeBtn = document.getElementById('themeBtn');
-  let dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const applyTheme = () => document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-  applyTheme();
-  themeBtn.addEventListener('click', () => { dark = !dark; applyTheme(); });
+  const root = document.documentElement;
+  const isDark = () => {
+    const t = root.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  };
+  themeBtn.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
 
   // i18n — EN / DE toggle
   // Keep tech stack tags, project codenames and tool names in English (standard in German tech).
   const I18N = {
     'nav.about':      { en: 'About',        de: 'Über mich' },
-    'nav.experience': { en: 'Experience',   de: 'Erfahrung' },
+    'nav.thesis':     { en: 'Thesis',       de: 'Thesis' },
     'nav.projects':   { en: 'Projects',     de: 'Projekte' },
-    'nav.education':  { en: 'Education',    de: 'Ausbildung' },
+    'nav.experience': { en: 'Experience',   de: 'Erfahrung' },
     'nav.contact':    { en: 'Contact',      de: 'Kontakt' },
 
     'hero.status': {
-      en: 'Open to AI / ML Engineer &amp; Data Scientist roles · Germany',
-      de: 'Offen für Positionen als AI / ML Engineer &amp; Data Scientist · Deutschland'
+      en: 'M.Sc. complete · Open to AI / ML Engineer &amp; Data Scientist roles · Germany',
+      de: 'M.Sc. abgeschlossen · Offen für Positionen als AI / ML Engineer &amp; Data Scientist · Deutschland'
     },
     'hero.role': {
       en: 'AI / ML Engineer <span class="sep">/</span> Data Scientist <span class="sep">/</span> LLM &amp; Agentic Systems',
       de: 'AI / ML Engineer <span class="sep">/</span> Data Scientist <span class="sep">/</span> LLM &amp; Agentic Systems'
     },
     'hero.intro': {
-      en: 'I build production-grade GenAI and ML systems: Agentic RAG, multi-agent pipelines, LLM apps, and data pipelines with end-to-end ownership from architecture to cloud deployment. 2+ years at Accenture, currently completing an M.Sc. in Big Data &amp; AI at SRH Berlin.',
-      de: 'Ich baue produktionsreife GenAI- und ML-Systeme: Agentic RAG, Multi-Agent-Pipelines, LLM-Anwendungen und Datenpipelines mit End-to-End-Verantwortung von der Architektur bis zum Cloud-Deployment. 2+ Jahre bei Accenture, aktuell Abschluss des M.Sc. in Big Data &amp; AI an der SRH Berlin.'
+      en: 'I build production-grade GenAI and ML systems: Agentic RAG, multi-agent pipelines and LLM apps, owned end to end from architecture to cloud deployment. 2+ years at Accenture, and a freshly completed <strong>M.Sc. in Big Data &amp; AI</strong> at SRH Berlin with a thesis on how LLM agents and their tools co-adapt.',
+      de: 'Ich baue produktionsreife GenAI- und ML-Systeme: Agentic RAG, Multi-Agent-Pipelines und LLM-Anwendungen, mit End-to-End-Verantwortung von der Architektur bis zum Cloud-Deployment. 2+ Jahre bei Accenture und ein frisch abgeschlossener <strong>M.Sc. in Big Data &amp; AI</strong> an der SRH Berlin, mit einer Thesis darüber, wie sich LLM-Agenten und ihre Tools gegenseitig anpassen.'
     },
-    'hero.cta_primary':   { en: 'Get in touch',   de: 'Kontakt aufnehmen' },
-    'hero.cta_secondary': { en: 'View projects',  de: 'Projekte ansehen' },
+    'hero.cta_primary': { en: 'Get in touch',          de: 'Kontakt aufnehmen' },
+    'hero.cta_thesis':  { en: 'Read about my thesis',  de: 'Zur Masterarbeit' },
+    'stat.years':  { en: 'years at Accenture',                       de: 'Jahre bei Accenture' },
+    'stat.msc':    { en: 'Big Data &amp; AI, SRH Berlin',            de: 'Big Data &amp; AI, SRH Berlin' },
+    'stat.thesis': { en: 'thesis: loop correctness with pacemaker',  de: 'Thesis: Korrektheit mit Pacemaker' },
+    'stat.certs':  { en: 'cloud &amp; ML certifications',            de: 'Cloud- &amp; ML-Zertifikate' },
 
-    'sec.about':          { en: 'About',          de: 'Über mich' },
-    'sec.skills':         { en: 'Skills',         de: 'Fähigkeiten' },
-    'sec.experience':     { en: 'Experience',     de: 'Berufserfahrung' },
-    'sec.projects':       { en: 'Projects',       de: 'Projekte' },
-    'sec.education':      { en: 'Education',      de: 'Ausbildung' },
-    'sec.certifications': { en: 'Certifications', de: 'Zertifikate' },
-    'sec.contact':        { en: 'Contact',        de: 'Kontakt' },
+    'sec.about_eyebrow':      { en: 'About',                   de: 'Über mich' },
+    'sec.about':              { en: 'Engineer first, <span class="serif">researcher by thesis.</span>', de: 'Engineer zuerst, <span class="serif">Forscher per Thesis.</span>' },
+    'sec.thesis_eyebrow':     { en: "Master's thesis · 2026",  de: 'Masterarbeit · 2026' },
+    'sec.thesis':             { en: 'PaceTest <span class="serif">· agent–tool co-adaptation</span>', de: 'PaceTest <span class="serif">· Agent-Tool-Koadaption</span>' },
+    'sec.projects_eyebrow':   { en: 'Selected work',           de: 'Ausgewählte Arbeiten' },
+    'sec.projects':           { en: 'Projects <span class="serif">I\'ve shipped.</span>', de: 'Projekte, <span class="serif">die ich gebaut habe.</span>' },
+    'sec.experience_eyebrow': { en: 'Experience',              de: 'Berufserfahrung' },
+    'sec.experience':         { en: 'Where I\'ve <span class="serif">worked.</span>', de: 'Wo ich <span class="serif">gearbeitet habe.</span>' },
+    'sec.skills_eyebrow':     { en: 'Toolkit',                 de: 'Toolkit' },
+    'sec.skills':             { en: 'Skills <span class="serif">&amp; stack.</span>', de: 'Fähigkeiten <span class="serif">&amp; Stack.</span>' },
+    'sec.education_eyebrow':  { en: 'Education',               de: 'Ausbildung' },
+    'sec.education':          { en: 'Degrees <span class="serif">&amp; certifications.</span>', de: 'Abschlüsse <span class="serif">&amp; Zertifikate.</span>' },
+    'sec.certifications':     { en: 'Certifications',          de: 'Zertifikate' },
+    'sec.contact_eyebrow':    { en: 'Contact',                 de: 'Kontakt' },
+    'sec.contact':            { en: 'Let\'s build <span class="serif">something.</span>', de: 'Lass uns <span class="serif">etwas bauen.</span>' },
 
     'about.p1': {
-      en: "I'm an AI / ML Engineer and Data Scientist based in Berlin, specializing in LLM application development, agentic systems, and production ML pipelines. At Accenture, I spent 2+ years engineering ML data pipelines and enterprise data systems, cutting processing time by 20% and earning the Accenture ACE Award for client outcomes.",
-      de: 'Ich bin AI / ML Engineer und Data Scientist mit Sitz in Berlin, spezialisiert auf LLM-Anwendungsentwicklung, agentische Systeme und produktive ML-Pipelines. Bei Accenture habe ich 2+ Jahre ML-Datenpipelines und Enterprise-Datensysteme entwickelt, die Verarbeitungszeit um 20 % reduziert und den Accenture ACE Award für herausragende Kundenergebnisse erhalten.'
+      en: "I'm an AI / ML Engineer and Data Scientist based in Berlin, specializing in LLM application development, agentic systems, and production ML pipelines. At <strong>Accenture</strong>, I spent 2+ years engineering ML data pipelines and enterprise data systems, cutting processing time by 20% and earning the Accenture ACE Award for client outcomes.",
+      de: 'Ich bin AI / ML Engineer und Data Scientist in Berlin, spezialisiert auf LLM-Anwendungsentwicklung, agentische Systeme und produktive ML-Pipelines. Bei <strong>Accenture</strong> habe ich 2+ Jahre ML-Datenpipelines und Enterprise-Datensysteme entwickelt, die Verarbeitungszeit um 20 % reduziert und den Accenture ACE Award für herausragende Kundenergebnisse erhalten.'
     },
     'about.p2': {
-      en: "These days I'm focused on the hard parts of putting LLMs and ML models in production: hybrid retrieval, self-correction loops, guardrails, observability, and evaluation harnesses. I care about systems that actually work under load, not demos.",
-      de: 'Mein aktueller Fokus liegt auf den anspruchsvollen Aspekten des produktiven Einsatzes von LLMs und ML-Modellen: Hybrid Retrieval, Self-Correction Loops, Guardrails, Observability und Evaluation Harnesses. Mir geht es um Systeme, die unter Last zuverlässig funktionieren, nicht um Demos.'
+      en: "I've just completed my <strong>M.Sc. in Big Data &amp; Artificial Intelligence</strong> at SRH Berlin. My thesis studied what happens when an LLM agent and its tool keep rewriting each other: when the loop drifts, when the tool starts confirming the agent's mistakes, and which simple regulators keep it stable.",
+      de: 'Ich habe gerade meinen <strong>M.Sc. in Big Data &amp; Künstliche Intelligenz</strong> an der SRH Berlin abgeschlossen. Meine Masterarbeit untersucht, was passiert, wenn sich ein LLM-Agent und sein Tool gegenseitig immer wieder umschreiben: wann die Schleife driftet, wann das Tool beginnt, die Fehler des Agenten zu bestätigen, und welche einfachen Regulatoren sie stabil halten.'
     },
+    'about.p3': {
+      en: "I'm focused on the hard parts of putting LLMs in production: hybrid retrieval, self-correction loops, guardrails, observability, and evaluation harnesses. I care about systems that work under load, not just in demos.",
+      de: 'Mein Fokus liegt auf den anspruchsvollen Aspekten des produktiven LLM-Einsatzes: Hybrid Retrieval, Self-Correction Loops, Guardrails, Observability und Evaluation Harnesses. Mir geht es um Systeme, die unter Last zuverlässig funktionieren, nicht nur in Demos.'
+    },
+    'fact.based':   { en: 'based in',  de: 'standort' },
+    'fact.based_v': { en: 'Berlin, Germany', de: 'Berlin, Deutschland' },
+    'fact.focus':   { en: 'focus',     de: 'fokus' },
+    'fact.focus_v': { en: 'LLM agents · RAG · MLOps', de: 'LLM-Agenten · RAG · MLOps' },
+    'fact.degree':  { en: 'degree',    de: 'abschluss' },
+    'fact.lang':    { en: 'languages', de: 'sprachen' },
+    'fact.open':    { en: 'open to',   de: 'offen für' },
+    'fact.open_v':  { en: 'Berlin or remote', de: 'Berlin oder remote' },
+
+    'thesis.supervisor': { en: 'Supervisor: Prof. Dr. Alexander Iliev', de: 'Betreuer: Prof. Dr. Alexander Iliev' },
+    'thesis.title': { en: 'When do AI agents and their tools deceive each other?', de: 'Wann täuschen sich KI-Agenten und ihre Tools gegenseitig?' },
+    'thesis.lede': {
+      en: 'A closed loop in which an LLM agent\'s system prompt and its calculator tool\'s documentation are both rewritten, round after round, from oracle feedback. I measured whether the loop cycles or drifts instead of converging, whether the tool ends up confirming the agent\'s errors ("tool sycophancy"), and whether simple regulators, which I call pacemakers, can keep the loop stable.',
+      de: 'Eine geschlossene Schleife, in der der System-Prompt eines LLM-Agenten und die Dokumentation seines Taschenrechner-Tools Runde für Runde anhand von Oracle-Feedback umgeschrieben werden. Ich habe gemessen, ob die Schleife zykelt oder driftet statt zu konvergieren, ob das Tool am Ende die Fehler des Agenten bestätigt („Tool Sycophancy“) und ob einfache Regulatoren, sogenannte Pacemaker, die Schleife stabil halten können.'
+    },
+    'thesis.findings': { en: 'Research questions &amp; findings', de: 'Forschungsfragen &amp; Ergebnisse' },
+    'thesis.rq1q': { en: 'Does co-adaptation cycle?', de: 'Zykelt die Koadaption?' },
+    'thesis.rq1a': {
+      en: 'Cycling is concentrated, not widespread: it is tied to specific knob settings (e.g. no oracle feedback with medium self-judgement degrades on every seed).',
+      de: 'Zyklen sind konzentriert, nicht flächendeckend: Sie hängen an bestimmten Parametereinstellungen (z. B. kein Oracle-Feedback bei mittlerer Selbstbewertung verschlechtert sich auf jedem Seed).'
+    },
+    'thesis.rq2q': { en: 'Does tool sycophancy emerge?', de: 'Entsteht Tool Sycophancy?' },
+    'thesis.rq2a': {
+      en: 'Conditionally, yes. One agent sends only the first step to the calculator and echoes its output verbatim; the mirror failure, tool abandonment, also appears. All 205 compliant-but-wrong events were hand-verified.',
+      de: 'Unter bestimmten Bedingungen, ja. Ein Agent schickt nur den ersten Rechenschritt an den Taschenrechner und übernimmt dessen Ausgabe wörtlich; auch der Gegenfehler, Tool Abandonment, tritt auf. Alle 205 regelkonformen, aber falschen Fälle wurden manuell geprüft.'
+    },
+    'thesis.rq3q': { en: 'Which pacemaker works best?', de: 'Welcher Pacemaker funktioniert am besten?' },
+    'thesis.rq3a': {
+      en: 'Freeze is the recommended default, with gating as a supplement. Diversity reseeding is harmful as a default. The corruption channel is agent-side rewriter drift, not tool-doc drift.',
+      de: 'Freeze ist der empfohlene Standard, Gating eine sinnvolle Ergänzung. Diversity-Reseeding schadet als Standard. Der Fehlerkanal ist die Drift des Rewriters auf Agentenseite, nicht die Drift der Tool-Dokumentation.'
+    },
+    'thesis.chart': { en: 'Correct answers by pacemaker · Qwen3-8B', de: 'Korrekte Antworten je Pacemaker · Qwen3-8B' },
+    'thesis.chart_note': {
+      en: 'Of 540 final answers per condition (3 seeds × 9 knob cells × 20 tasks). Freeze: 0 of 27 cells degraded. Gating: 1 of 27, at ~1.7× wall-clock.',
+      de: 'Von 540 finalen Antworten je Bedingung (3 Seeds × 9 Parameterzellen × 20 Aufgaben). Freeze: 0 von 27 Zellen verschlechtert. Gating: 1 von 27, bei ca. 1,7-facher Laufzeit.'
+    },
+    'thesis.s1':   { en: 'trajectories',  de: 'Trajektorien' },
+    'thesis.s2':   { en: 'scored rounds', de: 'bewertete Runden' },
+    'thesis.s3':   { en: 'pytest tests',  de: 'pytest-Tests' },
+    'thesis.s4':   { en: 'cross-model check (Claude Haiku, GPT-4o-mini)', de: 'Cross-Model-Check (Claude Haiku, GPT-4o-mini)' },
+    'thesis.code': { en: 'View the code', de: 'Code ansehen' },
 
     'skills.l_agentic':   { en: 'Agentic / LLM',   de: 'Agentisch / LLM' },
     'skills.l_models':    { en: 'Models',          de: 'Modelle' },
@@ -752,13 +981,17 @@
     'skills.l_cloud':     { en: 'Cloud / DevOps',  de: 'Cloud / DevOps' },
     'skills.l_data':      { en: 'Data Eng',        de: 'Data Engineering' },
     'skills.l_testing':   { en: 'Testing',         de: 'Testing' },
-    'skills.l_languages': { en: 'Languages',       de: 'Sprachen' },
+    'skills.l_research':  { en: 'Research',        de: 'Forschung' },
+    'skills.v_research': {
+      en: 'Experiment design, parameter sweeps, embedding-based drift metrics, reproducible seeded runs, manual error verification',
+      de: 'Experimentdesign, Parameter-Sweeps, embedding-basierte Drift-Metriken, reproduzierbare Seed-Läufe, manuelle Fehlerverifikation'
+    },
     'skills.v_languages': { en: 'English (C2) · German (B1)', de: 'Englisch (C2) · Deutsch (B1)' },
 
     'exp.acc_role': { en: 'Associate Software Developer', de: 'Associate Software Developer' },
     'exp.acc_sub': {
-      en: 'Machine Learning / Data Science · Enterprise Data & ML Pipeline Engineering · Pune, India',
-      de: 'Machine Learning / Data Science · Enterprise-Daten- & ML-Pipeline-Engineering · Pune, Indien'
+      en: 'Machine Learning / Data Science · Enterprise Data &amp; ML Pipeline Engineering · Pune, India',
+      de: 'Machine Learning / Data Science · Enterprise-Daten- &amp; ML-Pipeline-Engineering · Pune, Indien'
     },
     'exp.acc_li1': {
       en: 'Optimized Python-based ML data pipelines with vectorized operations, reducing end-to-end processing time by <strong>20%</strong>.',
@@ -791,60 +1024,63 @@
       de: 'An agilen Sprint-Zyklen mitgewirkt (Standups, Planning, Retrospektiven) und Features termingerecht ausgeliefert.'
     },
 
+    'proj.live': { en: 'Live demo',   de: 'Live-Demo' },
+    'proj.wip':  { en: 'In progress', de: 'In Arbeit' },
+    'proj.more': { en: 'also on github →', de: 'außerdem auf github →' },
     'proj.rag_title': { en: 'Agentic RAG Platform', de: 'Agentic-RAG-Plattform' },
     'proj.rag_desc': {
-      en: 'Production-grade Agentic RAG as a LangGraph state machine with self-correction loops: router, query rewriter, retrieve, rerank, grade, web-search fallback, generate, reflect. Hybrid retrieval (ChromaDB + BM25 + RRF) with cross-encoder reranking. InputGuard for PII / prompt injection, OutputGuard for faithfulness, RAGAS harness, OpenTelemetry on every node. Shipped with FastAPI + SSE, stdio MCP server, Streamlit UI, Docker.',
-      de: 'Produktionsreifes Agentic RAG als LangGraph-State-Machine mit Self-Correction Loops: Router, Query Rewriter, Retrieve, Rerank, Grade, Websuche-Fallback, Generate, Reflect. Hybrid Retrieval (ChromaDB + BM25 + RRF) mit Cross-Encoder-Reranking. InputGuard für PII / Prompt Injection, OutputGuard für Faithfulness, RAGAS-Harness, OpenTelemetry auf jedem Node. Ausgeliefert mit FastAPI + SSE, stdio-MCP-Server, Streamlit-UI, Docker.'
+      en: 'Production-grade Agentic RAG as a LangGraph state machine with self-correction loops: router, query rewriter, retrieve, rerank, grade, web-search fallback, generate, reflect. Hybrid retrieval (ChromaDB + BM25 + RRF) with cross-encoder reranking. InputGuard for PII / prompt injection, OutputGuard for faithfulness, RAGAS-style evaluation, OpenTelemetry on every node. Shipped with FastAPI + SSE, a stdio MCP server, Streamlit UI and Docker.',
+      de: 'Produktionsreifes Agentic RAG als LangGraph-State-Machine mit Self-Correction Loops: Router, Query Rewriter, Retrieve, Rerank, Grade, Websuche-Fallback, Generate, Reflect. Hybrid Retrieval (ChromaDB + BM25 + RRF) mit Cross-Encoder-Reranking. InputGuard für PII / Prompt Injection, OutputGuard für Faithfulness, RAGAS-artige Evaluation, OpenTelemetry auf jedem Node. Ausgeliefert mit FastAPI + SSE, stdio-MCP-Server, Streamlit-UI und Docker.'
     },
     'proj.inv_title': { en: 'AI Investment Research Assistant', de: 'KI-Investment-Research-Assistent' },
     'proj.inv_desc': {
-      en: 'Parallel multi-agent system where News Scout, Analyst, and Sentiment Judge fan out concurrently across Google News, yfinance, SEC EDGAR (10-K/10-Q/8-K), and Reddit, then synchronize to produce BUY / HOLD / SELL verdicts with bull case, bear case, and risks. Partial-failure tolerance, SHA-256 disk cache with TTL, pluggable LLM factory, and a self-contained HTML brief with Plotly charts and filterable source tables.',
-      de: 'Paralleles Multi-Agent-System, bei dem News Scout, Analyst und Sentiment Judge gleichzeitig Google News, yfinance, SEC EDGAR (10-K/10-Q/8-K) und Reddit abfragen und dann synchronisieren, um BUY / HOLD / SELL-Empfehlungen mit Bull Case, Bear Case und Risiken zu erzeugen. Partial-Failure-Toleranz, SHA-256-Disk-Cache mit TTL, austauschbare LLM-Factory und ein eigenständiges HTML-Briefing mit Plotly-Charts und filterbaren Quelltabellen.'
+      en: 'News Scout, Analyst and Sentiment Judge agents fan out in parallel across Google News, yfinance, SEC EDGAR and Reddit, then a Report Writer produces a BUY / HOLD / SELL brief with bull case, bear case and risks. Partial-failure tolerance, disk cache with TTL, a pluggable LLM factory, and an interactive HTML dashboard. Engineered to run on free-tier LLM keys.',
+      de: 'News-Scout-, Analyst- und Sentiment-Judge-Agenten fragen parallel Google News, yfinance, SEC EDGAR und Reddit ab, anschließend erstellt ein Report Writer ein BUY / HOLD / SELL-Briefing mit Bull Case, Bear Case und Risiken. Partial-Failure-Toleranz, Disk-Cache mit TTL, austauschbare LLM-Factory und ein interaktives HTML-Dashboard. Läuft auch mit Free-Tier-LLM-Keys.'
+    },
+    'proj.research_title': { en: 'AI Research Agent', de: 'KI-Research-Agent' },
+    'proj.research_desc': {
+      en: 'An autonomous agent that turns a research question into a sourced report. A LangGraph ReAct loop has Llama 3.3 70B (Groq) write search queries, Tavily search the web, and the model judge whether it has enough, searching again with refined queries until it does. FastAPI backend on Render, Streamlit frontend.',
+      de: 'Ein autonomer Agent, der aus einer Forschungsfrage einen Bericht mit Quellen erstellt. In einer LangGraph-ReAct-Schleife formuliert Llama 3.3 70B (Groq) Suchanfragen, Tavily durchsucht das Web, und das Modell entscheidet, ob die Informationen reichen, sonst sucht es mit verfeinerten Anfragen weiter. FastAPI-Backend auf Render, Streamlit-Frontend.'
+    },
+    'proj.docqa_title': { en: 'RAG Document Q&amp;A', de: 'RAG-Dokumenten-Q&amp;A' },
+    'proj.docqa_desc': {
+      en: 'Full-stack app: upload a PDF and ask questions about it. PyMuPDF parsing, sliding-window chunking, ChromaDB upsert storage and Groq Llama 3.1 with a strict context-only prompt that answers "I don\'t know" rather than hallucinate. Deployed on Render and Streamlit Cloud.',
+      de: 'Full-Stack-App: PDF hochladen und Fragen dazu stellen. PyMuPDF-Parsing, Sliding-Window-Chunking, ChromaDB-Upsert-Speicher und Groq Llama 3.1 mit striktem Kontext-Prompt, der lieber „Ich weiß es nicht“ antwortet als zu halluzinieren. Deployt auf Render und Streamlit Cloud.'
+    },
+    'proj.chunkless_title': { en: 'Chunk-Less RAG', de: 'Chunk-Less RAG' },
+    'proj.chunkless_desc': {
+      en: 'Retrieval without fixed-size chunks: parsing long filings (Apple\'s 2025 10-K) into a heading tree with Docling and navigating that structure instead of embedding slices. Built layer by layer with documented measurements and a 21-question eval set that uses heading paths as ground truth.',
+      de: 'Retrieval ohne feste Chunks: Lange Berichte (Apples 10-K 2025) werden mit Docling in einen Überschriften-Baum zerlegt, der statt eingebetteter Textstücke navigiert wird. Schicht für Schicht aufgebaut, mit dokumentierten Messungen und einem Eval-Set aus 21 Fragen mit Überschriften-Pfaden als Ground Truth.'
     },
     'proj.pizza_title': { en: 'AI Pizza Ordering Assistant', de: 'KI-Pizza-Bestellassistent' },
     'proj.pizza_desc': {
-      en: 'Conversational agent for a pizza delivery service. Designed a dialog flowchart and implemented a structured prompt-driven system to manage real-time customer interactions (menu validation, special requests like allergies and vegan, delivery address collection) outputting clean JSON orders. Also built a voice-enabled variant.',
-      de: 'Conversational Agent für einen Pizza-Lieferservice. Dialog-Flowchart entworfen und ein strukturiertes, prompt-getriebenes System implementiert, das Kundeninteraktionen in Echtzeit steuert (Menüvalidierung, Sonderwünsche wie Allergien und vegan, Erfassung der Lieferadresse) und saubere JSON-Bestellungen erzeugt. Zusätzlich eine sprachgesteuerte Variante entwickelt.'
+      en: 'Conversational agent for a pizza delivery service. A dialog flowchart and structured prompt-driven system handle menu validation, special requests (allergies, vegan) and delivery details, and output clean JSON orders. Includes a voice-enabled variant.',
+      de: 'Conversational Agent für einen Pizza-Lieferservice. Ein Dialog-Flowchart und ein strukturiertes, prompt-getriebenes System übernehmen Menüvalidierung, Sonderwünsche (Allergien, vegan) und Lieferdaten und erzeugen saubere JSON-Bestellungen. Inklusive sprachgesteuerter Variante.'
     },
-    'proj.neural_title': { en: 'Neural Time-Series Forecasting for Stocks', de: 'Neuronale Zeitreihen-Prognose für Aktien' },
-    'proj.neural_desc': {
-      en: 'ML pipeline for stock market forecasting on historical price and volume data. Feature engineering with technical indicators (MA, RSI, MACD), baseline models (Logistic Regression, Random Forest), then sequence models (LSTM / GRU). Proper time-series validation, classification metrics plus trading KPIs (Sharpe ratio, cumulative returns), and simple backtesting simulation.',
-      de: 'ML-Pipeline für Aktienmarkt-Prognosen auf Basis historischer Kurs- und Volumendaten. Feature Engineering mit technischen Indikatoren (MA, RSI, MACD), Baseline-Modelle (Logistische Regression, Random Forest), anschließend Sequenzmodelle (LSTM / GRU). Saubere Zeitreihen-Validierung, Klassifikationsmetriken sowie Trading-KPIs (Sharpe Ratio, kumulierte Renditen) und eine einfache Backtesting-Simulation.'
-    },
-    'proj.churn_title': { en: 'Customer Churn Prediction, End-to-End ML', de: 'Kunden-Churn-Prognose, End-to-End-ML' },
+    'proj.churn_title': { en: 'Customer Churn Prediction', de: 'Kunden-Churn-Prognose' },
     'proj.churn_desc': {
-      en: 'End-to-end churn prediction pipeline covering EDA, feature engineering, class imbalance handling (SMOTE), and comparison across Logistic Regression, XGBoost, and LightGBM. SHAP for explainability, MLflow for experiment tracking, FastAPI for serving, and a lightweight Streamlit dashboard for business stakeholders.',
-      de: 'End-to-End-Churn-Prognose-Pipeline mit EDA, Feature Engineering, Behandlung von Klassenungleichgewicht (SMOTE) und Vergleich von Logistischer Regression, XGBoost und LightGBM. SHAP für Erklärbarkeit, MLflow für Experiment-Tracking, FastAPI für das Serving und ein leichtgewichtiges Streamlit-Dashboard für Fachbereichs-Stakeholder.'
-    },
-    'proj.retail_title': { en: 'Retail Demand Forecasting', de: 'Retail-Nachfrageprognose' },
-    'proj.retail_desc': {
-      en: 'Hierarchical demand forecasting across SKU × store × week. Baselines (naive, ETS, Prophet) vs. gradient-boosted trees (LightGBM) with lag and rolling features, then a Temporal Fusion Transformer for the top tier. Cross-validation with expanding window, MAPE / WAPE metrics, and a reconciliation step across the hierarchy.',
-      de: 'Hierarchische Nachfrageprognose über SKU × Filiale × Woche. Baselines (Naive, ETS, Prophet) im Vergleich zu Gradient-Boosted Trees (LightGBM) mit Lag- und Rolling-Features, ergänzt durch einen Temporal Fusion Transformer für die oberste Ebene. Cross-Validation mit Expanding Window, MAPE- / WAPE-Metriken und ein Reconciliation-Schritt über die Hierarchie.'
+      en: 'End-to-end churn pipeline: EDA, feature engineering, class imbalance handling (SMOTE), and a comparison of Logistic Regression, XGBoost and LightGBM, with SHAP for explainability and MLflow for experiment tracking.',
+      de: 'End-to-End-Churn-Pipeline: EDA, Feature Engineering, Behandlung von Klassenungleichgewicht (SMOTE) und Vergleich von Logistischer Regression, XGBoost und LightGBM, mit SHAP für Erklärbarkeit und MLflow für Experiment-Tracking.'
     },
 
-    'edu.srh_degree': {
-      en: 'M.Sc. Big Data &amp; Artificial Intelligence · GPA 1.7 (German scale, equivalent to Distinction)',
-      de: 'M.Sc. Big Data &amp; Künstliche Intelligenz · Notendurchschnitt 1,7 (deutsche Skala, entspricht „mit Auszeichnung“)'
+    'edu.completed':   { en: 'Completed', de: 'Abgeschlossen' },
+    'edu.srh_date':    { en: 'Oct 2024 – 2026', de: 'Okt 2024 – 2026' },
+    'edu.srh_degree':  { en: 'M.Sc. Big Data &amp; Artificial Intelligence', de: 'M.Sc. Big Data &amp; Künstliche Intelligenz' },
+    'edu.srh_note': {
+      en: 'GPA 1.7 (German scale, equivalent to Distinction) · Thesis: agent–tool co-adaptation &amp; tool sycophancy',
+      de: 'Notendurchschnitt 1,7 (deutsche Skala, entspricht „mit Auszeichnung“) · Thesis: Agent-Tool-Koadaption &amp; Tool Sycophancy'
     },
-    'edu.srh_date':   { en: 'Oct 2024 – Present',   de: 'Okt 2024 – heute' },
-    'edu.pune_degree': {
-      en: 'B.Sc. Mechanical Engineering · CGPA 2.2 (German scale)',
-      de: 'B.Sc. Maschinenbau · Notendurchschnitt 2.2 (deutsche Skala“)'
-    },
+    'edu.pune_degree': { en: 'B.Sc. Mechanical Engineering', de: 'B.Sc. Maschinenbau' },
+    'edu.pune_note':   { en: 'GPA 2.2 (German scale)', de: 'Notendurchschnitt 2,2 (deutsche Skala)' },
 
     'contact.intro': {
       en: 'The fastest way to reach me is email. Open to AI Engineer, ML Engineer, and Data Scientist roles in Berlin or remote.',
       de: 'Am schnellsten bin ich per E-Mail erreichbar. Offen für Positionen als AI Engineer, ML Engineer und Data Scientist in Berlin oder remote.'
     },
-    'contact.email':        { en: 'email',    de: 'e-mail' },
-    'contact.phone':        { en: 'phone',    de: 'telefon' },
-    'contact.linkedin':     { en: 'linkedin', de: 'linkedin' },
-    'contact.github':       { en: 'github',   de: 'github' },
-    'contact.location':     { en: 'location', de: 'standort' },
     'contact.location_val': { en: 'Berlin, Germany', de: 'Berlin, Deutschland' },
 
     'footer.built': {
-      en: '&lt;/&gt; Built with HTML, CSS & care',
+      en: '&lt;/&gt; Built with HTML, CSS &amp; care',
       de: '&lt;/&gt; Mit HTML, CSS und Sorgfalt gebaut'
     }
   };
@@ -856,37 +1092,54 @@
 
   const applyLang = (lang) => {
     currentLang = lang;
-    document.documentElement.setAttribute('lang', lang);
+    root.setAttribute('lang', lang);
     document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      const entry = I18N[key];
+      const entry = I18N[el.getAttribute('data-i18n')];
       if (entry && entry[lang] !== undefined) el.innerHTML = entry[lang];
     });
-    if (lang === 'de') {
-      langDe.classList.add('lang-active');
-      langEn.classList.remove('lang-active');
-    } else {
-      langEn.classList.add('lang-active');
-      langDe.classList.remove('lang-active');
-    }
+    langDe.classList.toggle('lang-active', lang === 'de');
+    langEn.classList.toggle('lang-active', lang === 'en');
+    try { localStorage.setItem('lang', lang); } catch (e) {}
   };
   langBtn.addEventListener('click', () => applyLang(currentLang === 'en' ? 'de' : 'en'));
+  try { if (localStorage.getItem('lang') === 'de') applyLang('de'); } catch (e) {}
 
-  // Reveal on scroll
+  // Reveal on scroll (+ animate thesis bars when they come into view)
   const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }});
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      e.target.querySelectorAll('.bar-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+      io.unobserve(e.target);
+    });
   }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal, .stagger').forEach(el => io.observe(el));
 
-  // Scroll progress bar
+  // Card spotlight follows the cursor
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('pointermove', (ev) => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (ev.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (ev.clientY - r.top) + 'px');
+    });
+  });
+
+  // Scroll progress, nav border and active section link
   const progress = document.getElementById('progress');
-  const updateProgress = () => {
+  const nav = document.getElementById('nav');
+  const navLinks = [...document.querySelectorAll('.nav-links > a')];
+  const sections = navLinks.map(a => document.querySelector(a.getAttribute('href')));
+  const onScroll = () => {
     const h = document.documentElement;
-    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+    const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
     progress.style.width = Math.min(100, Math.max(0, scrolled * 100)) + '%';
+    nav.classList.toggle('scrolled', h.scrollTop > 8);
+    let current = -1;
+    sections.forEach((s, i) => { if (s && s.getBoundingClientRect().top < 140) current = i; });
+    navLinks.forEach((a, i) => a.classList.toggle('active', i === current));
   };
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  updateProgress();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 </script>
 
 </body>
