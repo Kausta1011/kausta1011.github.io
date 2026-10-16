@@ -310,6 +310,69 @@
     .mini-stat .l { font-size: 12px; color: var(--ink-muted); margin-top: 4px; line-height: 1.35; }
     .thesis-foot { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
 
+    /* DIAGRAMS (thesis loop, RAG pipeline) */
+    .loop { padding: 28px 40px 0; }
+    .dgm svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .dgm svg.dgm-m { display: none; }
+    .dgm .node rect { fill: var(--bg-elev); stroke: var(--line-strong); stroke-width: 1.5; animation: glow 8s ease-in-out infinite; }
+    .dgm .node.n2 rect { animation-delay: 2s; }
+    .dgm .node.n3 rect { animation-delay: 4s; }
+    .dgm .node.n4 rect { animation-delay: 6s; }
+    .dgm .node.pm rect { fill: color-mix(in srgb, var(--accent-2) 8%, var(--bg-elev)); stroke: color-mix(in srgb, var(--accent-2) 55%, var(--line)); }
+    @keyframes glow {
+      0%, 22%, 100% { stroke: var(--line-strong); }
+      6%, 16% { stroke: var(--accent); }
+    }
+    .dgm .t { fill: var(--ink); font: 600 15px 'Inter', sans-serif; text-anchor: middle; }
+    .dgm .s { fill: var(--ink-muted); font: 11.5px 'JetBrains Mono', monospace; text-anchor: middle; }
+    .dgm .lbl { fill: var(--ink-soft); font: 11.5px 'JetBrains Mono', monospace; }
+    .dgm .lbl.mid { text-anchor: middle; }
+    .dgm .lbl.end { text-anchor: end; }
+    .dgm .rounds { fill: var(--accent); font: 500 13px 'JetBrains Mono', monospace; text-anchor: middle; }
+    .dgm .edge { fill: none; stroke: var(--accent); stroke-width: 1.75; stroke-dasharray: 6 6; animation: march 1.2s linear infinite; }
+    .dgm .edge.reg { stroke: var(--accent-2); }
+    .dgm .ah { fill: var(--accent); }
+    .dgm .ah.reg { fill: var(--accent-2); }
+    @keyframes march { to { stroke-dashoffset: -12; } }
+    .knobs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 22px; }
+    .knob { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+    .knob code { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); }
+    .knob div { font-size: 13px; color: var(--ink-soft); margin-top: 4px; line-height: 1.45; }
+    .dgm svg.rag-m { display: none; }
+    details.rag { margin-bottom: 18px; position: relative; z-index: 1; }
+
+    /* Collapsible diagram toggle */
+    details.dgm > summary {
+      list-style: none; cursor: pointer; user-select: none;
+      display: flex; align-items: center; flex-wrap: wrap; gap: 6px 12px; padding: 13px 16px;
+      border: 1px dashed var(--line-strong); border-radius: 14px;
+      background: color-mix(in srgb, var(--accent) 3%, transparent);
+      transition: border-color .2s, background .2s;
+    }
+    details.dgm > summary::-webkit-details-marker { display: none; }
+    details.dgm > summary:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, transparent); }
+    details.dgm > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    details.dgm[open] > summary { border-style: solid; }
+    .dgm-ico {
+      width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; flex-shrink: 0;
+      background: var(--accent-soft); color: var(--accent); transition: transform .3s cubic-bezier(.2,.8,.2,1);
+    }
+    details.dgm[open] .dgm-ico { transform: rotate(90deg); }
+    .dgm-label { font-weight: 600; font-size: 15px; color: var(--ink); }
+    .dgm-hint {
+      margin-left: auto; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--ink-muted);
+    }
+    .dgm-hint .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: hint 2s ease-in-out infinite; }
+    @keyframes hint { 0%, 100% { opacity: .25; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.2); } }
+    .dgm-hint .h-open { display: none; }
+    details.dgm[open] .dgm-hint .h-open { display: inline; }
+    details.dgm[open] .dgm-hint .h-closed { display: none; }
+    details.dgm[open] .dgm-hint .dot { animation: none; opacity: .35; }
+    .dgm-body { padding-top: 22px; }
+    details.dgm[open] .dgm-body { animation: dgmIn .5s cubic-bezier(.2,.8,.2,1); }
+    @keyframes dgmIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
     /* PROJECTS */
     .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .card {
@@ -475,6 +538,8 @@
       .thesis-col + .thesis-col { border-left: none; border-top: 1px solid var(--line); }
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .nav-links > a { display: none; }
+      .dgm svg.rag-d { display: none; }
+      .dgm svg.rag-m { display: block; max-width: 340px; margin: 0 auto; }
     }
     @media (max-width: 640px) {
       body { font-size: 16px; }
@@ -489,6 +554,11 @@
       .thesis-col { padding: 26px 22px 30px; }
       .rq { grid-template-columns: 1fr; }
       .rq .a { grid-column: 1; }
+      .loop { padding: 24px 22px 0; }
+      .dgm svg.dgm-d { display: none; }
+      .dgm svg.dgm-m { display: block; }
+      .knobs { grid-template-columns: 1fr; }
+      .dgm-hint { margin-left: 40px; }
       .bar-row { grid-template-columns: 72px 1fr 46px; gap: 10px; }
       .contact-box { padding: 44px 22px; border-radius: 22px; }
       .orb-2 { display: none; }
@@ -585,6 +655,70 @@
         <p class="thesis-lede" data-i18n="thesis.lede">A closed loop in which an LLM agent's system prompt and its calculator tool's documentation are both rewritten, round after round, from oracle feedback. I measured whether the loop cycles or drifts instead of converging, whether the tool ends up confirming the agent's errors ("tool sycophancy"), and whether simple regulators, which I call pacemakers, can keep the loop stable.</p>
       </div>
 
+      <details class="loop dgm">
+        <summary>
+          <span class="dgm-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+          <span class="dgm-label" data-i18n="loop.title">How the loop works</span>
+          <span class="dgm-hint"><span class="dot"></span><span class="h-closed" data-i18n="dgm.open">click to expand diagram</span><span class="h-open" data-i18n="dgm.close">click to collapse</span></span>
+        </summary>
+        <div class="dgm-body">
+        <svg class="dgm-d" viewBox="0 0 760 400" role="img" aria-label="Diagram: the LLM agent calls the calculator tool; the oracle scores the agent's answers; the rewriter uses that feedback to rewrite both the agent prompt and the tool doc; a pacemaker regulates the rewriter. The loop repeats for 20 rounds.">
+          <defs>
+            <marker id="ahD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker>
+            <marker id="ahD2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah reg" d="M0 0L10 5L0 10z"/></marker>
+          </defs>
+          <path class="edge" d="M220 52 H536" marker-end="url(#ahD)"/>
+          <path class="edge" d="M540 80 H224" marker-end="url(#ahD)"/>
+          <path class="edge" d="M170 100 V180 H286" marker-end="url(#ahD)"/>
+          <path class="edge" d="M380 210 V246" marker-end="url(#ahD)"/>
+          <path class="edge" d="M290 280 H100 V104" marker-end="url(#ahD)"/>
+          <path class="edge" d="M470 280 H660 V104" marker-end="url(#ahD)"/>
+          <path class="edge reg" d="M380 340 V314" marker-end="url(#ahD2)"/>
+          <text class="lbl mid" x="380" y="44" data-i18n="loop.calls">calls</text>
+          <text class="lbl mid" x="380" y="97" data-i18n="loop.result">result</text>
+          <text class="lbl mid" x="230" y="171" data-i18n="loop.answers">answers</text>
+          <text class="lbl" x="392" y="233" data-i18n="loop.feedback">feedback</text>
+          <text class="lbl mid" x="195" y="271" data-i18n="loop.rw_prompt">rewrites prompt</text>
+          <text class="lbl mid" x="565" y="271" data-i18n="loop.rw_doc">rewrites doc</text>
+          <text class="lbl" x="392" y="331" data-i18n="loop.regulates">regulates</text>
+          <text class="rounds" x="565" y="185" data-i18n="loop.rounds">↻ K = 20 rounds</text>
+          <g class="node n1"><rect x="40" y="30" width="180" height="70" rx="14"/><text class="t" x="130" y="60" data-i18n="loop.agent">LLM agent</text><text class="s" x="130" y="80">system prompt</text></g>
+          <g class="node n1"><rect x="540" y="30" width="180" height="70" rx="14"/><text class="t" x="630" y="60" data-i18n="loop.tool">Calculator tool</text><text class="s" x="630" y="80">tool doc</text></g>
+          <g class="node n2"><rect x="290" y="150" width="180" height="60" rx="14"/><text class="t" x="380" y="175">Oracle</text><text class="s" x="380" y="195" data-i18n="loop.scores">scores answers</text></g>
+          <g class="node n3"><rect x="290" y="250" width="180" height="60" rx="14"/><text class="t" x="380" y="275">Rewriter</text><text class="s" x="380" y="295" data-i18n="loop.updates">updates both</text></g>
+          <g class="node n4 pm"><rect x="290" y="340" width="180" height="56" rx="14"/><text class="t" x="380" y="364">Pacemaker</text><text class="s" x="380" y="383">freeze · gate · reseed</text></g>
+        </svg>
+        <svg class="dgm-m" viewBox="0 0 340 392" role="img" aria-label="Diagram: the LLM agent calls the calculator tool; the oracle scores the agent's answers; the rewriter uses that feedback to rewrite both the agent prompt and the tool doc; a pacemaker regulates the rewriter. The loop repeats for 20 rounds.">
+          <defs>
+            <marker id="ahM" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker>
+            <marker id="ahM2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah reg" d="M0 0L10 5L0 10z"/></marker>
+          </defs>
+          <path class="edge" d="M150 30 H186" marker-end="url(#ahM)"/>
+          <path class="edge" d="M190 50 H154" marker-end="url(#ahM)"/>
+          <path class="edge" d="M80 68 V147 H96" marker-end="url(#ahM)"/>
+          <path class="edge" d="M170 174 V226" marker-end="url(#ahM)"/>
+          <path class="edge" d="M100 257 H30 V72" marker-end="url(#ahM)"/>
+          <path class="edge" d="M240 257 H310 V72" marker-end="url(#ahM)"/>
+          <path class="edge reg" d="M170 330 V288" marker-end="url(#ahM2)"/>
+          <text class="lbl" x="88" y="108" data-i18n="loop.answers">answers</text>
+          <text class="lbl" x="178" y="205" data-i18n="loop.feedback">feedback</text>
+          <text class="lbl" x="36" y="205">prompt</text>
+          <text class="lbl end" x="304" y="205">doc</text>
+          <text class="rounds" x="275" y="150">↻ K=20</text>
+          <g class="node n1"><rect x="10" y="10" width="140" height="58" rx="12"/><text class="t" x="80" y="35" data-i18n="loop.agent">LLM agent</text><text class="s" x="80" y="54">system prompt</text></g>
+          <g class="node n1"><rect x="190" y="10" width="140" height="58" rx="12"/><text class="t" x="260" y="35" data-i18n="loop.tool_short">Calculator</text><text class="s" x="260" y="54">tool doc</text></g>
+          <g class="node n2"><rect x="100" y="120" width="140" height="54" rx="12"/><text class="t" x="170" y="143">Oracle</text><text class="s" x="170" y="161" data-i18n="loop.scores">scores answers</text></g>
+          <g class="node n3"><rect x="100" y="230" width="140" height="54" rx="12"/><text class="t" x="170" y="253">Rewriter</text><text class="s" x="170" y="271" data-i18n="loop.updates">updates both</text></g>
+          <g class="node n4 pm"><rect x="80" y="330" width="180" height="54" rx="12"/><text class="t" x="170" y="353">Pacemaker</text><text class="s" x="170" y="371">freeze · gate · reseed</text></g>
+        </svg>
+        <div class="knobs">
+          <div class="knob"><code>feedback_strength</code><div data-i18n="loop.k1">How much oracle feedback drives the rewrite</div></div>
+          <div class="knob"><code>self_judgement_weight</code><div data-i18n="loop.k2">How much the agent's own judgement counts</div></div>
+          <div class="knob"><code>update_asymmetry</code><div data-i18n="loop.k3">Update rate of the agent vs. the tool</div></div>
+        </div>
+        </div>
+      </details>
+
       <div class="thesis-body">
         <div class="thesis-col">
           <div class="col-title" data-i18n="thesis.findings">Research questions &amp; findings</div>
@@ -645,6 +779,82 @@
         </div>
         <p data-i18n="proj.rag_desc">Production-grade Agentic RAG as a LangGraph state machine with self-correction loops: router, query rewriter, retrieve, rerank, grade, web-search fallback, generate, reflect. Hybrid retrieval (ChromaDB + BM25 + RRF) with cross-encoder reranking. InputGuard for PII / prompt injection, OutputGuard for faithfulness, RAGAS-style evaluation, OpenTelemetry on every node. Shipped with FastAPI + SSE, a stdio MCP server, Streamlit UI and Docker.</p>
         <div class="stack"><span>LangGraph</span><span>FastAPI</span><span>MCP</span><span>ChromaDB</span><span>BM25</span><span>OpenTelemetry</span><span>Docker</span></div>
+        <details class="rag dgm">
+          <summary>
+            <span class="dgm-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>
+            <span class="dgm-label" data-i18n="rag.toggle">See the pipeline architecture</span>
+            <span class="dgm-hint"><span class="dot"></span><span class="h-closed" data-i18n="dgm.open">click to expand diagram</span><span class="h-open" data-i18n="dgm.close">click to collapse</span></span>
+          </summary>
+          <div class="dgm-body">
+            <svg class="rag-d" viewBox="0 0 940 290" role="img" aria-label="Diagram: query passes InputGuard, then a router either answers directly or sends it through query rewriter, hybrid retrieval and cross-encoder reranking to a relevance grader. Relevant context goes to generation; irrelevant context triggers a web-search fallback first. A reflection step can loop back to the rewriter, and passing answers go through OutputGuard to the user.">
+              <defs><marker id="ahR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker></defs>
+              <path class="edge" d="M75 65 H96" marker-end="url(#ahR)"/>
+              <path class="edge" d="M225 65 H246" marker-end="url(#ahR)"/>
+              <path class="edge" d="M335 65 H356" marker-end="url(#ahR)"/>
+              <path class="edge" d="M460 65 H481" marker-end="url(#ahR)"/>
+              <path class="edge" d="M600 65 H621" marker-end="url(#ahR)"/>
+              <path class="edge" d="M740 65 H761" marker-end="url(#ahR)"/>
+              <path class="edge" d="M830 90 V186" marker-end="url(#ahR)"/>
+              <path class="edge" d="M790 90 V165 H620 V186" marker-end="url(#ahR)"/>
+              <path class="edge" d="M765 215 H669" marker-end="url(#ahR)"/>
+              <path class="edge" d="M545 215 H464" marker-end="url(#ahR)"/>
+              <path class="edge" d="M360 215 H239" marker-end="url(#ahR)"/>
+              <path class="edge" d="M100 215 H79" marker-end="url(#ahR)"/>
+              <path class="edge" d="M292 90 V275 H590 V244" marker-end="url(#ahR)"/>
+              <path class="edge reg" d="M410 190 V94" marker-end="url(#ahR)"/>
+              <text class="lbl" x="838" y="140" data-i18n="rag.irrelevant">irrelevant</text>
+              <text class="lbl mid" x="705" y="158" data-i18n="rag.relevant">relevant</text>
+              <text class="lbl" x="300" y="180" data-i18n="rag.direct">no retrieval</text>
+              <text class="lbl" x="418" y="145" data-i18n="rag.retry">retry</text>
+              <text class="lbl" x="300" y="207" data-i18n="rag.passes">passes</text>
+              <g class="node"><rect x="10" y="40" width="65" height="50" rx="25"/><text class="t" x="42.5" y="70" data-i18n="rag.query">query</text></g>
+              <g class="node"><rect x="100" y="40" width="125" height="50" rx="12" style="animation-delay:.5s"/><text class="t" x="162.5" y="61">InputGuard</text><text class="s" x="162.5" y="78">PII · injection</text></g>
+              <g class="node"><rect x="250" y="40" width="85" height="50" rx="12" style="animation-delay:1s"/><text class="t" x="292.5" y="61">router</text><text class="s" x="292.5" y="78">route</text></g>
+              <g class="node"><rect x="360" y="40" width="100" height="50" rx="12" style="animation-delay:1.5s"/><text class="t" x="410" y="61">rewriter</text><text class="s" x="410" y="78">query</text></g>
+              <g class="node"><rect x="485" y="40" width="115" height="50" rx="12" style="animation-delay:2s"/><text class="t" x="542.5" y="61">retrieve</text><text class="s" x="542.5" y="78">dense+BM25+RRF</text></g>
+              <g class="node"><rect x="625" y="40" width="115" height="50" rx="12" style="animation-delay:2.5s"/><text class="t" x="682.5" y="61">rerank</text><text class="s" x="682.5" y="78">cross-encoder</text></g>
+              <g class="node"><rect x="765" y="40" width="95" height="50" rx="12" style="animation-delay:3s"/><text class="t" x="812.5" y="61">grade</text><text class="s" x="812.5" y="78">relevance</text></g>
+              <g class="node"><rect x="765" y="190" width="115" height="50" rx="12" style="animation-delay:3.5s"/><text class="t" x="822.5" y="211">web search</text><text class="s" x="822.5" y="228">Tavily → DDG</text></g>
+              <g class="node"><rect x="545" y="190" width="120" height="50" rx="12" style="animation-delay:4s"/><text class="t" x="605" y="211">generate</text><text class="s" x="605" y="228">LLM · SSE</text></g>
+              <g class="node pm"><rect x="360" y="190" width="100" height="50" rx="12" style="animation-delay:4.5s"/><text class="t" x="410" y="211">reflect</text><text class="s" x="410" y="228">self-check</text></g>
+              <g class="node"><rect x="100" y="190" width="135" height="50" rx="12" style="animation-delay:5s"/><text class="t" x="167.5" y="211">OutputGuard</text><text class="s" x="167.5" y="228">faithfulness</text></g>
+              <g class="node"><rect x="10" y="190" width="65" height="50" rx="25" style="animation-delay:5.5s"/><text class="t" x="42.5" y="220" data-i18n="rag.answer">answer</text></g>
+            </svg>
+            <svg class="rag-m" viewBox="0 0 316 676" role="img" aria-label="Diagram: query passes InputGuard, then a router either answers directly or sends it through query rewriter, hybrid retrieval and cross-encoder reranking to a relevance grader. Relevant context goes to generation; irrelevant context triggers a web-search fallback first. A reflection step can loop back to the rewriter, and passing answers go through OutputGuard to the user.">
+              <defs><marker id="ahRm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker></defs>
+              <path class="edge" d="M120 42 V58" marker-end="url(#ahRm)"/>
+              <path class="edge" d="M120 102 V118" marker-end="url(#ahRm)"/>
+              <path class="edge" d="M120 162 V178" marker-end="url(#ahRm)"/>
+              <path class="edge" d="M120 222 V238" marker-end="url(#ahRm)"/>
+              <path class="edge" d="M120 282 V298" marker-end="url(#ahRm)"/>
+              <path class="edge" d="M120 342 V358" marker-end="url(#ahRm)"/>
+              <path class="edge" d="M120 402 V448" marker-end="url(#ahRm)"/>
+              <path class="edge" d="M120 492 V508" marker-end="url(#ahRm)"/>
+              <path class="edge" d="M120 552 V568" marker-end="url(#ahRm)"/>
+              <path class="edge" d="M120 612 V628" marker-end="url(#ahRm)"/>
+              <path class="edge" d="M200 382 H250 V406" marker-end="url(#ahRm)"/>
+              <path class="edge" d="M250 450 V472 H204" marker-end="url(#ahRm)"/>
+              <path class="edge" d="M40 142 H18 V472 H36" marker-end="url(#ahRm)"/>
+              <path class="edge reg" d="M200 532 H306 V202 H204" marker-end="url(#ahRm)"/>
+              <text class="lbl" x="204" y="374" data-i18n="rag.irrelevant">irrelevant</text>
+              <text class="lbl" x="128" y="428" data-i18n="rag.relevant">relevant</text>
+              <text class="lbl mid" x="13" y="300" transform="rotate(-90 13 300)" data-i18n="rag.direct">no retrieval</text>
+              <text class="lbl end" x="300" y="300" data-i18n="rag.retry">retry</text>
+              <g class="node"><rect x="40" y="10" width="160" height="32" rx="16"/><text class="t" x="120" y="31" data-i18n="rag.query">query</text></g>
+              <g class="node"><rect x="40" y="62" width="160" height="40" rx="10" style="animation-delay:.5s"/><text class="t" x="120" y="79">InputGuard</text><text class="s" x="120" y="94">PII · injection</text></g>
+              <g class="node"><rect x="40" y="122" width="160" height="40" rx="10" style="animation-delay:1s"/><text class="t" x="120" y="139">router</text><text class="s" x="120" y="154">route</text></g>
+              <g class="node"><rect x="40" y="182" width="160" height="40" rx="10" style="animation-delay:1.5s"/><text class="t" x="120" y="199">rewriter</text><text class="s" x="120" y="214">query</text></g>
+              <g class="node"><rect x="40" y="242" width="160" height="40" rx="10" style="animation-delay:2s"/><text class="t" x="120" y="259">retrieve</text><text class="s" x="120" y="274">dense + BM25 + RRF</text></g>
+              <g class="node"><rect x="40" y="302" width="160" height="40" rx="10" style="animation-delay:2.5s"/><text class="t" x="120" y="319">rerank</text><text class="s" x="120" y="334">cross-encoder</text></g>
+              <g class="node"><rect x="40" y="362" width="160" height="40" rx="10" style="animation-delay:3s"/><text class="t" x="120" y="379">grade</text><text class="s" x="120" y="394">relevance</text></g>
+              <g class="node"><rect x="208" y="410" width="84" height="40" rx="10" style="animation-delay:3.5s"/><text class="t" x="250" y="427" style="font-size:13px">web search</text><text class="s" x="250" y="442">Tavily</text></g>
+              <g class="node"><rect x="40" y="452" width="160" height="40" rx="10" style="animation-delay:4s"/><text class="t" x="120" y="469">generate</text><text class="s" x="120" y="484">LLM · SSE</text></g>
+              <g class="node pm"><rect x="40" y="512" width="160" height="40" rx="10" style="animation-delay:4.5s"/><text class="t" x="120" y="529">reflect</text><text class="s" x="120" y="544">self-check</text></g>
+              <g class="node"><rect x="40" y="572" width="160" height="40" rx="10" style="animation-delay:5s"/><text class="t" x="120" y="589">OutputGuard</text><text class="s" x="120" y="604">faithfulness</text></g>
+              <g class="node"><rect x="40" y="632" width="160" height="32" rx="16" style="animation-delay:5.5s"/><text class="t" x="120" y="653" data-i18n="rag.answer">answer</text></g>
+            </svg>
+          </div>
+        </details>
         <div class="card-links"><a href="https://github.com/Kausta1011/agentic-rag-platform" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a></div>
       </div>
 
@@ -946,6 +1156,33 @@
       en: 'A closed loop in which an LLM agent\'s system prompt and its calculator tool\'s documentation are both rewritten, round after round, from oracle feedback. I measured whether the loop cycles or drifts instead of converging, whether the tool ends up confirming the agent\'s errors ("tool sycophancy"), and whether simple regulators, which I call pacemakers, can keep the loop stable.',
       de: 'Eine geschlossene Schleife, in der der System-Prompt eines LLM-Agenten und die Dokumentation seines Taschenrechner-Tools Runde für Runde anhand von Oracle-Feedback umgeschrieben werden. Ich habe gemessen, ob die Schleife zykelt oder driftet statt zu konvergieren, ob das Tool am Ende die Fehler des Agenten bestätigt („Tool Sycophancy“) und ob einfache Regulatoren, sogenannte Pacemaker, die Schleife stabil halten können.'
     },
+    'dgm.open':  { en: 'click to expand diagram', de: 'klicken für Diagramm' },
+    'dgm.close': { en: 'click to collapse',       de: 'klicken zum Schließen' },
+    'rag.toggle':     { en: 'See the pipeline architecture', de: 'Pipeline-Architektur ansehen' },
+    'rag.query':      { en: 'query',        de: 'Anfrage' },
+    'rag.answer':     { en: 'answer',       de: 'Antwort' },
+    'rag.relevant':   { en: 'relevant',     de: 'relevant' },
+    'rag.irrelevant': { en: 'irrelevant',   de: 'irrelevant' },
+    'rag.direct':     { en: 'no retrieval', de: 'ohne Retrieval' },
+    'rag.retry':      { en: 'retry',        de: 'erneut' },
+    'rag.passes':     { en: 'passes',       de: 'besteht' },
+    'loop.title':     { en: 'How the loop works', de: 'So funktioniert die Schleife' },
+    'loop.calls':     { en: 'calls',           de: 'ruft auf' },
+    'loop.result':    { en: 'result',          de: 'Ergebnis' },
+    'loop.answers':   { en: 'answers',         de: 'Antworten' },
+    'loop.feedback':  { en: 'feedback',        de: 'Feedback' },
+    'loop.rw_prompt': { en: 'rewrites prompt', de: 'schreibt Prompt um' },
+    'loop.rw_doc':    { en: 'rewrites doc',    de: 'schreibt Doku um' },
+    'loop.regulates': { en: 'regulates',       de: 'reguliert' },
+    'loop.rounds':    { en: '↻ K = 20 rounds', de: '↻ K = 20 Runden' },
+    'loop.agent':     { en: 'LLM agent',       de: 'LLM-Agent' },
+    'loop.tool':      { en: 'Calculator tool', de: 'Rechner-Tool' },
+    'loop.tool_short':{ en: 'Calculator',      de: 'Rechner' },
+    'loop.scores':    { en: 'scores answers',  de: 'bewertet Antworten' },
+    'loop.updates':   { en: 'updates both',    de: 'aktualisiert beide' },
+    'loop.k1': { en: 'How much oracle feedback drives the rewrite', de: 'Wie stark das Oracle-Feedback die Umschreibung steuert' },
+    'loop.k2': { en: "How much the agent's own judgement counts",  de: 'Wie stark die Selbstbewertung des Agenten zählt' },
+    'loop.k3': { en: 'Update rate of the agent vs. the tool',       de: 'Update-Rate des Agenten im Vergleich zum Tool' },
     'thesis.findings': { en: 'Research questions &amp; findings', de: 'Forschungsfragen &amp; Ergebnisse' },
     'thesis.rq1q': { en: 'Does co-adaptation cycle?', de: 'Zykelt die Koadaption?' },
     'thesis.rq1a': {
